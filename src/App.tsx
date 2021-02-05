@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import Video from "./Video";
+import getVideos from "./api/video"
+
+import "./App.css"
+
 
 function App() {
+  const [videos, setVideos] = useState<any[]>([]);
+
+  useEffect(() => {
+    let response = getVideos();
+
+    response.then(((data: any) => {
+      setVideos(data.map((video)=>({
+        id: video.id,
+        data: video.data
+      })))
+    }))
+
+  }, [videos]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="app">
+        <div className="app_videos">
+          {
+            videos.map(({ id, data }) => (
+                <Video
+                    key={id}
+                    url={data.url}
+                    channel={data.channel}
+                    description={data.description}
+                    song={data.song}
+                    likes={data.likes}
+                    messages={data.messages}
+                    shares={data.shares}
+                />
+            ))
+          }
+        </div>
+      </div>
   );
 }
 
