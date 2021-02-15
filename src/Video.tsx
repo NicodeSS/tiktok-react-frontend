@@ -58,6 +58,8 @@ function Video({
                 channel={channel}
                 description={description}
                 song={song}
+
+                playing={playing}
             />
             <VideoSidebar
                 vid={vid}
