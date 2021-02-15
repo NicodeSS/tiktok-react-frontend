@@ -4,14 +4,14 @@ import Ticker from "react-ticker";
 
 import "./VideoFooter.css";
 
-function VideoFooter({ channel, description, song}) {
+function VideoFooter({channel, description, song}) {
     return (
         <div className="videoFooter">
             <div className="videoFooter_text">
                 <h3>@{channel}</h3>
                 <p>{description}</p>
                 <div className="videoFooter_ticker">
-                    <MusicNoteIcon className="videoFooter_icon" />
+                    <MusicNoteIcon className="videoFooter_icon"/>
                     <Ticker mode="smooth"
                     >
                         {() => (
@@ -20,7 +20,7 @@ function VideoFooter({ channel, description, song}) {
                     </Ticker>
                 </div>
             </div>
-            <img className="videoFooter_record" src="./disc.png" alt="disc" />
+            <img className="videoFooter_record" src="./disc.png" alt="disc"/>
         </div>
     )
 }
