@@ -6,20 +6,17 @@ import {useInView} from "react-intersection-observer";
 import "./Video.css";
 
 function Video({
-                   vid,
                    url,
                    channel,
                    description,
                    song,
                    likes,
                    messages,
-                   shares,
-
-                   like
+                   shares
                }) {
     const [playing, setPlaying] = useState<boolean>(false);
     const videoRef = useRef<any>(null);
-    const {ref, inView} = useInView({
+    const { ref, inView } = useInView({
         threshold: 0.5,
     });
 
@@ -62,8 +59,6 @@ function Video({
                 playing={playing}
             />
             <VideoSidebar
-                vid={vid}
-                like={like}
                 likes={likes}
                 messages={messages}
                 shares={shares}

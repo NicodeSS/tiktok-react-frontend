@@ -22,7 +22,7 @@ function VideoFooter({channel, description, song, playing}) {
                     </Ticker>
                 </div>
             </div>
-            <img className="videoFooter_record" src="./disc.png" alt="disc"/>
+            <img className="videoFooter_record" src="./disc.png" alt="disc" />
         </div>
     )
 }
