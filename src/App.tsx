@@ -1,45 +1,55 @@
-import React, {useEffect, useState} from 'react';
-import Video from "./Video";
-import getVideos from "./api/video"
+import React, {useState} from 'react'
+import {Tab,Tabs,TabList,TabPanel} from 'react-tabs'
+import LiveTvIcon from '@material-ui/icons/LiveTv';
+import CloseIcon from '@material-ui/icons/Close';
+import VideoPage from "./VideoPage"
+import LivePage from "./LivePage"
+
 
 import "./App.css"
 
 
+
 function App() {
-  const [videos, setVideos] = useState<any[]>([]);
+    const [tabIndex,setTabIndex] = useState(0)
+    return (
+        <div className={"app"}>
+            <Tabs
+                onSelect={()=>console.log(tabIndex)}
+                selectedIndex={tabIndex}
+            >
+                <TabList style={{"display":"none"}}>
+                    <Tab>Video</Tab>
+                    <Tab>Live</Tab>
+                </TabList>
 
-  useEffect(() => {
-    let response = getVideos();
-
-    response.then(((data: any) => {
-      setVideos(data.map((video)=>({
-        id: video.id,
-        data: video.data
-      })))
-    }))
-
-  }, [videos]);
-
-  return (
-      <div className="app">
-        <div className="app_videos">
-          {
-            videos.map(({ id, data }) => (
-                <Video
-                    key={id}
-                    url={data.url}
-                    channel={data.channel}
-                    description={data.description}
-                    song={data.song}
-                    likes={data.likes}
-                    messages={data.messages}
-                    shares={data.shares}
-                />
-            ))
-          }
+                <TabPanel>
+                    <div className={"app-container"}>
+                        <div className={"LiveButton"}>
+                            <LiveTvIcon
+                                fontSize={"large"}
+                                htmlColor={"white"}
+                                onClick={()=>{setTabIndex(1)}}
+                            ></LiveTvIcon>
+                        </div>
+                        <VideoPage></VideoPage>
+                    </div>
+                </TabPanel>
+                <TabPanel>
+                    <div className={"app-container"}>
+                        <div className={"CloseButton"}>
+                            <CloseIcon
+                                fontSize={"large"}
+                                htmlColor={"white"}
+                                onClick={()=>{setTabIndex(0)}}
+                            ></CloseIcon>
+                        </div>
+                        <LivePage></LivePage>
+                    </div>
+                </TabPanel>
+            </Tabs>
         </div>
-      </div>
-  );
+    );
 }
 
-export default App;
+export default App
