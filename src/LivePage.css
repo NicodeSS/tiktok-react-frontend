@@ -1,0 +1,18 @@
+.app_lives {
+    position: relative;
+    height: 100%;
+    max-width: 100%;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+
+
+.app_lives::-webkit-scrollbar {
+    display: none;
+}
+
+.app_lives {
+    -ms-overflow-style: none;
+}

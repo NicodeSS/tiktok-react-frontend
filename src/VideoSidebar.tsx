@@ -16,6 +16,7 @@ function VideoSidebar({ likes, shares, messages }) {
                 {liked ? (
                     <FavoriteIcon
                         fontSize="large"
+                        htmlColor={"red"}
                         onClick={() => setLiked(false)}
 
                     />

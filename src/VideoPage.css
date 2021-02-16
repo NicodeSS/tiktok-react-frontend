@@ -1,0 +1,27 @@
+.app_videos {
+    position: relative;
+    height: 100%;
+    max-width: 900px;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+.app_videos > ul
+{
+    list-style: none;
+    padding: 0;
+    height: 100%;
+}
+
+.app_videos > ul > li {
+    height: 100%;
+}
+
+.app_videos::-webkit-scrollbar {
+    display: none;
+}
+
+.app_videos {
+    -ms-overflow-style: none;
+}

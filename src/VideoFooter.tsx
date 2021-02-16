@@ -4,6 +4,8 @@ import Ticker from "react-ticker";
 
 import "./VideoFooter.css";
 
+const disc = require('./disc.png')
+
 function VideoFooter({channel, description, song, playing}) {
     return (
         <div className="videoFooter">
@@ -22,7 +24,7 @@ function VideoFooter({channel, description, song, playing}) {
                     </Ticker>
                 </div>
             </div>
-            <img className="videoFooter_record" src="./disc.png" alt="disc" />
+            <img className="videoFooter_record" src={disc} alt="disc" />
         </div>
     )
 }
