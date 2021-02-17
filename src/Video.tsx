@@ -4,6 +4,7 @@ import VideoSidebar from "./VideoSidebar";
 import {useInView} from "react-intersection-observer";
 
 import "./Video.css";
+
 // import Player from "xgplayer";
 //
 // class Video extends React.Component<any, any> {
@@ -56,24 +57,15 @@ import "./Video.css";
 // }
 
 
-function Video({
-                   _id,
-                   url,
-                   channel,
-                   description,
-                   song,
-                   likes,
-                   messages,
-                   shares
-               }) {
+function Video({videoInfo}):JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const videoRef = useRef<any>(null);
     const { ref, inView } = useInView({
         threshold: 0.5,
     });
 
-
-    const onVideoPress = (e) => {
+    // Click Event
+    const onVideoPress = (e):void => {
         e.preventDefault();
         if (playing) {
             videoRef.current.pause();
@@ -84,7 +76,8 @@ function Video({
         }
     }
 
-    useEffect(() => {
+    // Scroll state listener
+    useEffect(():void => {
         if (inView) {
             videoRef.current.play();
             setPlaying(true);
@@ -107,19 +100,22 @@ function Video({
                 autoPlay
                 onClick={onVideoPress}
                 ref={videoRef}
-                src={url}
+                src={videoInfo.videoUrl}
             />
-            <VideoFooter
-                channel={channel}
-                description={description}
-                song={song}
 
+            <VideoFooter
+                author_nick={videoInfo.author_nick}
+                tagList={videoInfo.tagList}
+                description={videoInfo.description}
+                song={videoInfo.song}
                 playing={playing}
             />
+
             <VideoSidebar
-                likes={likes}
-                messages={messages}
-                shares={shares}
+                author_avatar={videoInfo.author_avatar}
+                like={videoInfo.like}
+                comment={videoInfo.comment}
+                share={videoInfo.share}
             />
         </div>
     )
