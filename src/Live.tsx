@@ -4,22 +4,14 @@ import {useInView} from "react-intersection-observer";
 import "./Live.css"
 
 
-function Live({
-                url,
-                author,
-                description,
-                createdAt,
-                updatedAt,
-                like,
-                comment,
-                share,
-               }) {
+function Live({liveInfo}):JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const liveRef = useRef<any>(null);
-    const { ref, inView } = useInView({
+    const {ref, inView} = useInView({
         threshold: 0.5,
     });
 
+    // Click Event
     const onLivePress = (e) => {
         e.preventDefault();
         if (playing) {
@@ -31,7 +23,7 @@ function Live({
         }
     }
 
-
+    // Scroll Event Listener
     useEffect(() => {
         if (inView) {
             liveRef.current.play();
@@ -52,7 +44,7 @@ function Live({
                 webkit-playsinline={"true"}
                 onClick={onLivePress}
                 ref={liveRef}
-                src={url}
+                src={liveInfo.playUrl}
             >
             </video>
         </div>

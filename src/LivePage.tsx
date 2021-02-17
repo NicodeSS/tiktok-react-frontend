@@ -4,44 +4,46 @@ import Live from "./Live";
 
 import "./LivePage.css"
 
-class LivePage extends React.Component<any, any>{
+interface LiveInfo {
+    _id: string,
+    author_id: string,
+    author_nick: string,
+    author_avatar: string,
+    publishUrl: string,
+    playUrl: string,
+    description: string,
+}
+
+class LivePage extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = {lives:[]};
+        this.state = {lives: []};
     }
+
     componentDidMount() {
         let response = getLives();
-        response.then(((data: any) => {
-            let lives = data.map((live) => ({
-                id: live.id,
-                data: live.data
-            }))
-            this.setState({lives:lives})
+        response.then(((data: unknown) => {
+            let lives = data
+            this.setState({lives: lives})
         }))
     }
-    render(){
+
+    render():JSX.Element {
         return (
             <div className="app_lives">
-                {
-                    this.state.lives.map(({id, data}) => (
-                        <Live
-                            key={id}
-                            url={data.url}
-                            author={data.author}
-                            description={data.description}
-                            createdAt={data.createdAt}
-                            updatedAt={data.updatedAt}
-                            like={data.like}
-                            comment={data.comment}
-                            share={data.share}
-                        />
-                    ))
-                }
+                <ul>
+                    {
+                        this.state.lives.map((info: LiveInfo) => (
+                            <li key={info._id}>
+                                <Live liveInfo={info}/>
+                            </li>
+                        ))
+                    }
+                </ul>
             </div>
         );
     }
 }
-
 
 
 // function LivePage():JSX.Element {

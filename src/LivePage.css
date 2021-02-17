@@ -8,6 +8,15 @@
     white-space: nowrap;
 }
 
+.app_lives > ul {
+    list-style: none;
+    padding: 0;
+    height: 100%;
+}
+
+.app_lives > ul > li {
+    height: 100%;
+}
 
 .app_lives::-webkit-scrollbar {
     display: none;
