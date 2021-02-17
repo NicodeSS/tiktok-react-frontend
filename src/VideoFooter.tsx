@@ -6,11 +6,12 @@ import "./VideoFooter.css";
 
 const disc = require('./disc.png')
 
-function VideoFooter({channel, description, song, playing}) {
+function VideoFooter({author_nick, tagList, description, song, playing}):JSX.Element {
     return (
         <div className="videoFooter">
             <div className="videoFooter_text">
-                <h3>@{channel}</h3>
+                <h3>@{author_nick}</h3>
+                <strong>{("#" + tagList.join(" #"))}</strong>
                 <p>{description}</p>
                 <div className="videoFooter_ticker">
                     <MusicNoteIcon className="videoFooter_icon"/>

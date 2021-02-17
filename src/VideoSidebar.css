@@ -10,3 +10,14 @@
     text-align: center;
     cursor: pointer;
 }
+
+.videoSidebar_avatar {
+    padding: 10px;
+    width: 35px;
+    height: 35px;
+}
+
+.videoSidebar_avatar > img {
+    width: 100%;
+    height: 100%;
+}

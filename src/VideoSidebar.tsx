@@ -7,35 +7,40 @@ import numeral from "numeral";
 
 import "./VideoSidebar.css";
 
-function VideoSidebar({ likes, shares, messages }) {
-    const [liked, setLiked] = useState(false);
+function VideoSidebar({ author_avatar, like, comment, share }):JSX.Element {
+    const [liked, setLiked] = useState<boolean>(false);
 
     return (
         <div className="videoSidebar">
+            <div className="videoSidebar_button">
+                <div className="videoSidebar_avatar">
+                    <img src={author_avatar} alt="avatar"/>
+                </div>
+            </div>
             <div className="videoSidebar_button">
                 {liked ? (
                     <FavoriteIcon
                         fontSize="large"
                         htmlColor={"red"}
-                        onClick={() => setLiked(false)}
+                        onClick={():void => setLiked(false)}
 
                     />
                 ) : (
                     <FavoriteBorderIcon
                         fontSize="large"
-                        onClick={() => setLiked(true)}
+                        onClick={():void => setLiked(true)}
                     />
                 )
                 }
-                <p>{liked ? numeral(likes + 1).format("0.0a") : numeral(likes).format("0.0a")}</p>
+                <p>{liked ? numeral(like + 1).format("0.0a") : numeral(like).format("0.0a")}</p>
             </div>
             <div className="videoSidebar_button">
                 <MessageIcon  fontSize="large" />
-                <p>{numeral(messages).format("0.0a")}</p>
+                <p>{numeral(comment).format("0.0a")}</p>
             </div>
             <div className="videoSidebar_button">
                 <ShareIcon fontSize="large" />
-                <p>{numeral(shares).format("0.0a")}</p>
+                <p>{numeral(share).format("0.0a")}</p>
             </div>
         </div>
     )

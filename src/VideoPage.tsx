@@ -4,39 +4,48 @@ import Video from "./Video";
 
 import "./VideoPage.css"
 
+export interface VideoInfo {
+    _id: string,
+    videoUrl: string,
+    imgUrl: string,
+    author_nick: string,
+    author_avatar: string,
+    author_id: string,
+    description: string,
+    tagList: Array<string>
+    song: string,
+    createdAt: string,
+    updatedAt: string,
+    like: number,
+    comment: number,
+    share: number
+}
+
 class VideoPage extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = {videos: []}
+        this.state = {
+            videos: []
+        }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let response = getVideos();
-        response.then(((data: any) => {
-            let videos = data.map((video) => ({
-                id: video.id,
-                data: video.data
-            }))
+        response.then(((data: unknown):void => {
+            let videos = data;
             this.setState({videos: videos})
         }))
     }
 
-    render() {
+    render():JSX.Element {
         return (
             <div className="app_videos">
                 <ul>
                     {
-                        this.state.videos.map(({id, data}) => (
-                            <li key={id}>
+                        this.state.videos.map((info: VideoInfo) => (
+                            <li key={info._id}>
                                 <Video
-                                    _id={id}
-                                    url={data.url}
-                                    channel={data.channel}
-                                    description={data.description}
-                                    song={data.song}
-                                    likes={data.likes}
-                                    messages={data.messages}
-                                    shares={data.shares}
+                                    videoInfo={info}
                                 />
                             </li>
                         ))
@@ -46,41 +55,5 @@ class VideoPage extends React.Component<any, any> {
         );
     }
 }
-
-// function VideoPage():JSX.Element {
-//     const [videos, setVideos] = useState<any[]>([]);
-//
-//     useEffect(() => {
-//         let response = getVideos();
-//
-//         response.then(((data: any) => {
-//             if(this.mounted)
-//             setVideos(data.map((video) => ({
-//                 id: video.id,
-//                 data: video.data
-//             })))
-//         }))
-//         return ()=>{}
-//     }, [videos]);
-//
-//     return (
-//         <div className="app_videos">
-//             {
-//                 videos.map(({id, data}) => (
-//                     <Video
-//                         key={id}
-//                         url={data.url}
-//                         channel={data.channel}
-//                         description={data.description}
-//                         song={data.song}
-//                         likes={data.likes}
-//                         messages={data.messages}
-//                         shares={data.shares}
-//                     />
-//                 ))
-//             }
-//         </div>
-//     );
-// }
 
 export default VideoPage
