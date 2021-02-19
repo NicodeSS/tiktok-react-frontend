@@ -26,7 +26,7 @@ class VideoPage extends React.Component<any, any> {
         super(props);
         this.state = {
             videos: []
-        }
+        };
     }
 
     componentDidMount() {

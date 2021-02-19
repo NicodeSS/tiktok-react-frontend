@@ -4,7 +4,7 @@ import Ticker from "react-ticker";
 
 import "./VideoFooter.css";
 
-const disc = require('./disc.png')
+const disc = './img/disc.png';
 
 function VideoFooter({author_nick, tagList, description, song, playing}):JSX.Element {
     return (
