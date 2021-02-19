@@ -1,0 +1,18 @@
+.description {
+  height: 20px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
