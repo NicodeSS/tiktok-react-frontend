@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
+import Videojs from "video.js";
+import "video.js/dist/video-js.css";
 
 import "./Live.css"
 
