@@ -30,11 +30,7 @@ class VideoPage extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        let response = getVideos();
-        response.then(((data: unknown):void => {
-            let videos = data;
-            this.setState({videos: videos})
-        }))
+        getVideos(this,{})
     }
 
     render():JSX.Element {

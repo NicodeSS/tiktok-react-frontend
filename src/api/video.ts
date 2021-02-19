@@ -1,4 +1,20 @@
-const getVideos = () => {
+import axios from "../plugins/axios"
+
+const getVideos = async (_this: any,params :object) => {
+    try {
+        let response = await axios.get('/video/list',params);
+        _this.setState({videos: response.data})
+    }
+    catch (error)
+    {
+        console.log("Error happend at getLives()")
+        console.error(error)
+        _this.setState({videos: []})
+    }
+
+}
+
+const getVideosMocked = () => {
     return new Promise((resolve, reject)=>{
         resolve(
             [
