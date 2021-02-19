@@ -1,12 +1,10 @@
 import axios from "../plugins/axios"
 
-const getLives = async (_this: any,params :object) => {
+const getLives = async (_this: any, params: object) => {
     try {
-        let response = await axios.get('/live/list',params);
+        let response = await axios.get('/live/list', params);
         _this.setState({lives: response.data})
-    }
-    catch (error)
-    {
+    } catch (error) {
         console.log("Error happend at getLives()")
         console.error(error)
         _this.setState({lives: []})
@@ -20,8 +18,8 @@ const getLivesMocked = () => {
             [
                 {
                     "_id": "602bdd7cb32b6358cd0591fe",
-                    "author_id":"602bc541e2ff9049179b504e",
-                    "author_nick":"无名小子",
+                    "author_id": "602bc541e2ff9049179b504e",
+                    "author_nick": "无名小子",
                     "author_avatar": "http://182.61.20.79:3000/res/avatar/icon.jpg",
                     "publishUrl": "rtmp://182.61.20.79:1935/live/602bc541e2ff9049179b504e",
                     "playUrl": "http://182.61.20.79:1936/live/602d053e7032bb66359ba19e/index.m3u8",
@@ -29,8 +27,8 @@ const getLivesMocked = () => {
                 },
                 {
                     "_id": "602bde75b32b6358cd0591ff",
-                    "author_id":"602bc541e2ff9049179b504e",
-                    "author_nick":"无名小子",
+                    "author_id": "602bc541e2ff9049179b504e",
+                    "author_nick": "无名小子",
                     "author_avatar": "http://182.61.20.79:3000/res/avatar/icon.jpg",
                     "publishUrl": "rtmp://182.61.20.79:1935/live/602bc551e2ff9049179b504f",
                     "playUrl": "http://182.61.20.79:1936/live/602d053e7032bb66359ba19e/index.m3u8",
