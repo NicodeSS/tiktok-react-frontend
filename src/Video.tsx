@@ -93,7 +93,6 @@ function Video({videoInfo}):JSX.Element {
             <video
                 className="video_player"
                 loop
-                muted
                 playsInline
                 preload="auto"
                 webkit-playsinline={"true"}
