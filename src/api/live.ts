@@ -1,4 +1,20 @@
-const getLives = () => {
+import axios from "../plugins/axios"
+
+const getLives = async (_this: any,params :object) => {
+    try {
+        let response = await axios.get('/live/list',params);
+        _this.setState({lives: response.data})
+    }
+    catch (error)
+    {
+        console.log("Error happend at getLives()")
+        console.error(error)
+        _this.setState({lives: []})
+    }
+
+}
+
+const getLivesMocked = () => {
     return new Promise((resolve, reject) => {
         resolve(
             [
@@ -24,4 +40,5 @@ const getLives = () => {
         )
     })
 }
+
 export default getLives

@@ -34,7 +34,12 @@ class LivePage extends React.Component<any, any> {
     }
     
     componentDidMount() {
-        this.fetchLives();
+        // let response = getLives();
+        // response.then(((data: unknown) => {
+        //     let lives = data
+        //     this.setState({lives: lives})
+        // }))
+        getLives(this,{});
     }
 
     render():JSX.Element {

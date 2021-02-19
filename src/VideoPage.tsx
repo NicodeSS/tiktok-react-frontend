@@ -27,22 +27,10 @@ class VideoPage extends React.Component<any, any> {
         this.state = {
             videos: []
         };
-        this.fetchVideo = this.fetchVideo.bind(this);
-    }
-
-    fetchVideo() {
-        fetch('http://182.61.20.79:3000/api/video/list', {
-            method: 'get'
-        })
-        .then(res => res.json())
-        .then(data => {
-            let videos = data;
-            this.setState({videos});
-        });
     }
 
     componentDidMount() {
-        this.fetchVideo();
+        getVideos(this,{})
     }
 
     render():JSX.Element {
