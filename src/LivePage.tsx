@@ -18,19 +18,6 @@ class LivePage extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {lives: []};
-        this.fetchLives = this.fetchLives.bind(this);
-    }
-
-    fetchLives() {
-        fetch('http://182.61.20.79:3000/api/live/list', {
-            method: 'get'
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            let lives = data;
-            this.setState({lives});
-        });
     }
     
     componentDidMount() {
