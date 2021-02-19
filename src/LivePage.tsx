@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react"
 import getLives from "./api/live";
 import Live from "./Live";
+import AuthorInfo from "./components/live/AuthorInfo";
+import Description from "./components/live/Description";
+import Comment from "./components/live/Comment";
 
 import "./LivePage.css"
 
@@ -21,11 +24,6 @@ class LivePage extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        // let response = getLives();
-        // response.then(((data: unknown) => {
-        //     let lives = data
-        //     this.setState({lives: lives})
-        // }))
         getLives(this,{});
     }
 
@@ -36,6 +34,9 @@ class LivePage extends React.Component<any, any> {
                     {
                         this.state.lives.map((info: LiveInfo) => (
                             <li key={info._id}>
+                                <AuthorInfo info={info}></AuthorInfo>
+                                <Description info={info}></Description>
+                                <Comment></Comment>
                                 <Live liveInfo={info}/>
                             </li>
                         ))
