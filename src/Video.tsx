@@ -42,12 +42,11 @@ function Video({videoInfo}):JSX.Element {
                 className="video_player"
                 loop
                 playsInline
-                preload="auto"
                 webkit-playsinline={"true"}
-                autoPlay
                 onClick={onVideoPress}
                 ref={videoRef}
                 src={videoInfo.videoUrl}
+                poster={videoInfo.imgUrl}
             />
 
             <VideoFooter
