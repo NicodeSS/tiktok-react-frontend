@@ -1,5 +1,4 @@
 import axios from "axios"
-import React from "react"
 
 let http = axios.create({
     baseURL: process.env.NODE_ENV === "production" ?
@@ -23,7 +22,7 @@ http.interceptors.request.use(
 );
 
 let methods = {
-    get: function(url, params):Promise<any> {
+    get: function(url:string, params={}):Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "GET",
@@ -31,14 +30,14 @@ let methods = {
                 params: params
             })
                 .then(function(res) {
-                    !res.data.status ? resolve(res) : reject(res);
+                     resolve(res)
                 })
                 .catch(function(err) {
-                    reject(err);
+                    reject(err)
                 });
         });
     },
-    post: function(url, params):Promise<any> {
+    post: function(url:string, params:object):Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "POST",
@@ -46,14 +45,14 @@ let methods = {
                 data: params
             })
                 .then(function(res) {
-                    !res.data.status ? resolve(res) : reject(res);
+                    resolve(res)
                 })
                 .catch(function(err) {
-                    reject(err);
+                    reject(err)
                 });
         });
     },
-    put: function(url, params):Promise<any> {
+    put: function(url:string, params:object):Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "PUT",
@@ -61,14 +60,14 @@ let methods = {
                 data: params
             })
                 .then(function(res) {
-                    !res.data.status ? resolve(res) : reject(res);
+                    resolve(res)
                 })
                 .catch(function(err) {
-                    reject(err);
+                    reject(err)
                 });
         });
     },
-    delete: function(url, params):Promise<any> {
+    delete: function(url:string, params={}):Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "DELETE",
@@ -76,14 +75,14 @@ let methods = {
                 params: params
             })
                 .then(function(res) {
-                    !res.data.status ? resolve(res) : reject(res);
+                    resolve(res)
                 })
                 .catch(function(err) {
-                    reject(err);
+                    reject(err)
                 });
         });
     },
-    patch: function(url, params):Promise<any> {
+    patch: function(url:string, params:object):Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "PATCH",
@@ -91,10 +90,10 @@ let methods = {
                 data: params
             })
                 .then(function(res) {
-                    !res.data.status ? resolve(res) : reject(res);
+                    resolve(res)
                 })
                 .catch(function(err) {
-                    reject(err);
+                    reject(err)
                 });
         });
     }
