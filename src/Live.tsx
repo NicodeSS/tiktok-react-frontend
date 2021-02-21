@@ -2,9 +2,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
 
 import "./Live.css"
+import Comment from "./Comment";
+import WriteComment from "./WriteComment";
 
 
-function Live({liveInfo}):JSX.Element {
+function Live({liveInfo,index}):JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const liveRef = useRef<any>(null);
     const {ref, inView} = useInView({
@@ -47,6 +49,12 @@ function Live({liveInfo}):JSX.Element {
                 src={liveInfo.playUrl}
             >
             </video>
+
+            {/*<Comment*/}
+            {/*    id = {info._id}*/}
+            {/*/>*/}
+            <WriteComment writeComment = {false} index = {index}/>
+
         </div>
     )
 }

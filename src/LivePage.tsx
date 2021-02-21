@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react"
-import getLives from "./api/live";
+import React, {useEffect, useRef, useState} from "react"
+import {getLives} from "./api/live";
 import Live from "./Live";
 
 import "./LivePage.css"
+import WriteComment from "./WriteComment";
+import Comment from "./Comment";
 
 interface LiveInfo {
     _id: string,
@@ -17,8 +19,10 @@ interface LiveInfo {
 class LivePage extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = {lives: []};
+        this.state = {lives: [],writeComment:[]};
     }
+
+
 
     componentDidMount() {
         // let response = getLives();
@@ -31,12 +35,12 @@ class LivePage extends React.Component<any, any> {
 
     render():JSX.Element {
         return (
-            <div className="app_lives">
+            <div className="app_lives" >
                 <ul>
                     {
-                        this.state.lives.map((info: LiveInfo) => (
+                        this.state.lives.map((info: LiveInfo,index) => (
                             <li key={info._id}>
-                                <Live liveInfo={info}/>
+                                <Live liveInfo={info} index={index}/>
                             </li>
                         ))
                     }
