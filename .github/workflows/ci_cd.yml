@@ -1,13 +1,13 @@
-name: ci
+name: ci_cd
 
 on:
-  pull_request:
+  push:
     branches:
       - main
       - master
 
 jobs:
-  ci:
+  ci_cd:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -36,3 +36,14 @@ jobs:
 
       - name: Build static page
         run: npm run build --if-present
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.1.4
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.HOST_SSH_KEY}}
+          ARGS: "-avzr --delete"
+          SOURCE: "build/"
+          REMOTE_HOST: ${{secrets.REMOTE_HOST}}
+          REMOTE_USER: ${{secrets.REMOTE_USER}}
+          TARGET: ${{secrets.REMOTE_TARGET}}
+
