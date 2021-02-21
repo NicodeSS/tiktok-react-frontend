@@ -1,25 +1,9 @@
 import React from "react";
 import getVideos from "./api/video";
 import Video from "./Video";
+import {VideoInfo} from './types/video'
 
 import "./VideoPage.css"
-
-export interface VideoInfo {
-    _id: string,
-    videoUrl: string,
-    imgUrl: string,
-    author_nick: string,
-    author_avatar: string,
-    author_id: string,
-    description: string,
-    tagList: Array<string>
-    song: string,
-    createdAt: string,
-    updatedAt: string,
-    like: number,
-    comment: number,
-    share: number
-}
 
 class VideoPage extends React.Component<any, any> {
     constructor(props) {
@@ -30,10 +14,10 @@ class VideoPage extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        getVideos(this,{})
+        getVideos(this, {})
     }
 
-    render():JSX.Element {
+    render(): JSX.Element {
         return (
             <div className="app_videos">
                 <ul>
