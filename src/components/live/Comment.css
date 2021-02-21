@@ -1,0 +1,19 @@
+.comment {
+  height: 30px;
+  width: 150px;
+  border-radius: 15px;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  background-color: rgba(0, 0, 0, 0.2);
+  outline: medium;
+  border: none;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: white;
+  opacity: 1;
+}
