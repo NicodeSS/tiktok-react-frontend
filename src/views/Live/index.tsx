@@ -27,15 +27,15 @@ class LivePage extends React.Component<any, any> {
     render():JSX.Element {
         return (
             <div className="lives_container">
+                <Link to="/">
+                    <div className="close-btn">
+                        <CloseIcon
+                            fontSize={"large"}
+                            htmlColor={"white"}
+                        ></CloseIcon>
+                    </div>
+                </Link>
                 <div className="app_lives">
-                    <Link to="/">
-                        <div className="close-btn">
-                            <CloseIcon
-                                fontSize={"large"}
-                                htmlColor={"white"}
-                            ></CloseIcon>
-                        </div>
-                    </Link>
                     <ul>
                         {
                             this.state.lives.map((info: LiveInfo) => (

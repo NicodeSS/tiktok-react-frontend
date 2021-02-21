@@ -29,16 +29,15 @@ class VideoPage extends React.Component<any, any> {
     render(): JSX.Element {
         return (
             <div className="videos_container">
-
+                <Link to="/live">
+                    <div className="live-btn">
+                        <LiveTvIcon
+                            fontSize={"large"}
+                            htmlColor={"white"}
+                        ></LiveTvIcon>
+                    </div>
+                </Link>
                 <div className="app_videos">
-                    <Link to="/live">
-                        <div className="live-btn">
-                            <LiveTvIcon
-                                fontSize={"large"}
-                                htmlColor={"white"}
-                            ></LiveTvIcon>
-                        </div>
-                    </Link>
                     <ul>
                         {
                             this.state.videos.map((info: VideoInfo) => (
