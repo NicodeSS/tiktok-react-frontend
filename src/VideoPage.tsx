@@ -13,8 +13,15 @@ class VideoPage extends React.Component<any, any> {
         };
     }
 
-    componentDidMount() {
-        getVideos(this, {})
+    async componentDidMount() {
+        try {
+            let response = await getVideos();
+            const videos : Array<VideoInfo> = response.data;
+            this.setState({videos})
+        } catch (error) {
+            console.error(error)
+            this.setState({videos: []})
+        }
     }
 
     render(): JSX.Element {

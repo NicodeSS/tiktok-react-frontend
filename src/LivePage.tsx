@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import getLives from "./api/live";
 import Live from "./Live";
 import {LiveInfo} from './types/live'
@@ -13,13 +13,15 @@ class LivePage extends React.Component<any, any> {
         this.state = {lives: []};
     }
 
-    componentDidMount() {
-        // let response = getLives();
-        // response.then(((data: unknown) => {
-        //     let lives = data
-        //     this.setState({lives: lives})
-        // }))
-        getLives(this,{});
+    async componentDidMount() {
+        try {
+            let response = await getLives();
+            let lives: Array<LiveInfo> = response.data
+            this.setState({lives})
+        } catch (error) {
+            console.error(error)
+            this.setState({lives: []})
+        }
     }
 
     render():JSX.Element {
