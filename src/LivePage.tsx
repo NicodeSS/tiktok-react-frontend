@@ -1,7 +1,11 @@
 import React from "react"
 import getLives from "./api/live";
 import Live from "./Live";
+import AuthorInfo from "./components/live/AuthorInfo";
+import Description from "./components/live/Description";
+import Comment from "./components/live/Comment";
 import {LiveInfo} from './types/live'
+
 
 import "./LivePage.css"
 
@@ -31,6 +35,9 @@ class LivePage extends React.Component<any, any> {
                     {
                         this.state.lives.map((info: LiveInfo) => (
                             <li key={info._id}>
+                                <AuthorInfo info={info}></AuthorInfo>
+                                <Description info={info}></Description>
+                                <Comment></Comment>
                                 <Live liveInfo={info}/>
                             </li>
                         ))
