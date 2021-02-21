@@ -4,8 +4,7 @@ import Live from "./Live";
 import AuthorInfo from "./components/live/AuthorInfo";
 import Description from "./components/live/Description";
 import Comment from "./components/live/Comment";
-import {LiveInfo} from './types/live'
-
+import {LiveInfo} from './types/live';
 import "./LivePage.css"
 
 
