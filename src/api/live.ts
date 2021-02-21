@@ -1,7 +1,7 @@
 import axios from "../utils/axios"
 
 const getLives = (params={}) => {
-    return axios.get('/video/list',params)
+    return axios.get('/live/list',params)
 }
 
 const getLivesMocked = () => {
