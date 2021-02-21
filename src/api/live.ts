@@ -1,15 +1,7 @@
-import axios from "../plugins/axios"
+import axios from "../utils/axios"
 
-const getLives = async (_this: any, params: object) => {
-    try {
-        let response = await axios.get('/live/list', params);
-        _this.setState({lives: response.data})
-    } catch (error) {
-        console.log("Error happend at getLives()")
-        console.error(error)
-        _this.setState({lives: []})
-    }
-
+const getLives = (params={}) => {
+    return axios.get('/video/list',params)
 }
 
 const getLivesMocked = () => {

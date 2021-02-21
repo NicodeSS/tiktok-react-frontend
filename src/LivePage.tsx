@@ -1,18 +1,11 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import getLives from "./api/live";
 import Live from "./Live";
+import {LiveInfo} from './types/live'
 
 import "./LivePage.css"
 
-interface LiveInfo {
-    _id: string,
-    author_id: string,
-    author_nick: string,
-    author_avatar: string,
-    publishUrl: string,
-    playUrl: string,
-    description: string,
-}
+
 
 class LivePage extends React.Component<any, any> {
     constructor(props) {
@@ -20,13 +13,15 @@ class LivePage extends React.Component<any, any> {
         this.state = {lives: []};
     }
 
-    componentDidMount() {
-        // let response = getLives();
-        // response.then(((data: unknown) => {
-        //     let lives = data
-        //     this.setState({lives: lives})
-        // }))
-        getLives(this,{});
+    async componentDidMount() {
+        try {
+            let response = await getLives();
+            let lives: Array<LiveInfo> = response.data
+            this.setState({lives})
+        } catch (error) {
+            console.error(error)
+            this.setState({lives: []})
+        }
     }
 
     render():JSX.Element {
