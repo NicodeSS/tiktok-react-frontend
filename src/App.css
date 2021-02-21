@@ -15,19 +15,7 @@
     height: 100%;
 }
 
-.LiveButton {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 9;
-}
 
-.CloseButton {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 9;
-}
 
 .react-tabs,.react-tabs__tab-panel--selected {
     width: 100%;
