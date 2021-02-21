@@ -1,5 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
+import AuthorInfo from "./components/live/AuthorInfo";
+import Description from "./components/live/Description";
+import Comment from "./components/live/Comment";
 
 import "./Live.css"
 
@@ -37,6 +40,9 @@ function Live({liveInfo}):JSX.Element {
 
     return (
         <div className="live" ref={ref}>
+            <AuthorInfo info={liveInfo}></AuthorInfo>
+            <Description info={liveInfo}></Description>
+            <Comment></Comment>
             <video
                 className="live_player"
                 playsInline
