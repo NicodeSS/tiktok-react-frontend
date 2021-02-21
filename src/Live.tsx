@@ -51,8 +51,8 @@ function Live({liveInfo}):JSX.Element {
                 onClick={onLivePress}
                 ref={liveRef}
                 src={liveInfo.playUrl}
-            >
-            </video>
+            />
+
         </div>
     )
 }
