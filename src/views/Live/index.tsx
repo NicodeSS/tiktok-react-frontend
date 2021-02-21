@@ -16,7 +16,7 @@ class LivePage extends React.Component<any, any> {
     async componentDidMount() {
         try {
             let response = await getLives();
-            let lives: Array<LiveInfo> = response.data
+            let lives: Array<LiveInfo> = response.data.lives
             this.setState({lives})
         } catch (error) {
             console.error(error)
