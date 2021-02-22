@@ -7,8 +7,7 @@ import DisplayComment from "./components/live/DisplayComment";
 import "./Live.css"
 
 
-
-function Live({liveInfo,index}):JSX.Element {
+function Live({liveInfo, index}): JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const liveRef = useRef<any>(null);
     const {ref, inView} = useInView({
@@ -41,8 +40,8 @@ function Live({liveInfo,index}):JSX.Element {
 
     return (
         <div className="live" ref={ref}>
-            <AuthorInfo info={liveInfo}></AuthorInfo>
-            <Description info={liveInfo}></Description>
+            <AuthorInfo info={liveInfo}/>
+            <Description info={liveInfo}/>
             <video
                 className="live_player"
                 playsInline
@@ -50,10 +49,11 @@ function Live({liveInfo,index}):JSX.Element {
                 webkit-playsinline={"true"}
                 onClick={onLivePress}
                 ref={liveRef}
-                src={liveInfo.playUrl}/>
+                src={liveInfo.playUrl}
+            />
 
             <DisplayComment
-                id = {liveInfo._id}
+                id={liveInfo._id}
             />
         </div>
     )
