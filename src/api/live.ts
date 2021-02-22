@@ -1,18 +1,10 @@
-import axios from "../plugins/axios"
+import axios from "../utils/axios"
 
-const getLives = async (_this: any, params: object) => {
-    try {
-        let response = await axios.get('/live/list', params);
-        _this.setState({lives: response.data})
-    } catch (error) {
-        console.log("Error happend at getLives()")
-        console.error(error)
-        _this.setState({lives: []})
-    }
-
+const getLives = (params={}) => {
+    return axios.get('/live/list',params)
 }
 
-const getComments = (_this: any,live_id: string)=>{
+const getCommentsWS = (live_id: string)=>{
 
     let wsUrl = 'ws://182.61.20.79:8080?room=' + live_id //接口
     console.log(wsUrl);
@@ -22,12 +14,13 @@ const getComments = (_this: any,live_id: string)=>{
         console.log("匿名用户来到直播间");
     };
 
-    ws.onmessage = function(evt) { //监听message事件，接收服务端实时传过来的数据
-        _this.comments.push(evt.data)
-        // console.log(comments);
-    };
+    // ws.onmessage = function(evt) { //监听message事件，接收服务端实时传过来的数据
+    //     // _this.comments.push(evt.data)
+    //     // console.log(comments);
+    // };
 
     // ws.send("我是一条评论"); //发送评论到服务端
+    return ws;
 }
 
 const getLivesMocked = () => {
@@ -57,4 +50,4 @@ const getLivesMocked = () => {
     })
 }
 
-export {getLives,getComments}
+export {getLives,getCommentsWS}

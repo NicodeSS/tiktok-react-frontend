@@ -1,9 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
+import AuthorInfo from "./components/live/AuthorInfo";
+import Description from "./components/live/Description";
+import DisplayComment from "./DisplayComment";
 
 import "./Live.css"
-import Comment from "./Comment";
-import WriteComment from "./WriteComment";
+
 
 
 function Live({liveInfo,index}):JSX.Element {
@@ -39,6 +41,8 @@ function Live({liveInfo,index}):JSX.Element {
 
     return (
         <div className="live" ref={ref}>
+            <AuthorInfo info={liveInfo}></AuthorInfo>
+            <Description info={liveInfo}></Description>
             <video
                 className="live_player"
                 playsInline
@@ -46,15 +50,11 @@ function Live({liveInfo,index}):JSX.Element {
                 webkit-playsinline={"true"}
                 onClick={onLivePress}
                 ref={liveRef}
-                src={liveInfo.playUrl}
-            >
-            </video>
+                src={liveInfo.playUrl}/>
 
-            {/*<Comment*/}
-            {/*    id = {info._id}*/}
-            {/*/>*/}
-            <WriteComment writeComment = {false} index = {index}/>
-
+            <DisplayComment
+                id = {liveInfo._id}
+            />
         </div>
     )
 }

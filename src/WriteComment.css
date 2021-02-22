@@ -1,18 +1,37 @@
 .writeComment{
-    position: relative;
-    font-size: 15px;
-    color: #ecd9d9;
-    bottom: 7%;
-    background-color: rgba(0,0,0,0.2);
-    left: 10px;
-    max-width: 20%;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 20px;
+    height: 30px;
+    width: fit-content;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 2%;
+    left: 10%;
+    background-color: rgba(0, 0, 0, 0.2);
+    outline: medium;
+    border: none;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.commentInputArea{
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    width: 100%;
+    height: 13%;
+}
+
+.sendCommentIcon{
+    position: absolute;
+    top:25%;
+    right:5%;
 }
 
 .commentInput{
-    /*display: inline;*/
-    position: relative;
-    /*bottom: 7%;*/
+    position: absolute;
+    border-style: none;
+    width: 75%;
+    left: 5%;
+    padding: 2px;
+    top:20%;
+    height: 60%;
 }
