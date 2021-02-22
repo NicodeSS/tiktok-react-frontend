@@ -10,9 +10,11 @@ import "./index.css";
 function VideoSidebar({author_avatar, like, comment, share}): JSX.Element {
     const [liked, setLiked] = useState<boolean>(false);
     const disc = './img/disc.png';
+  
     const getShortenNumber = (x:number) => {
         return x>=10000 ? (x/10000.0).toFixed(1)+"w" : x;
     }
+    
     return (
         <div>
             <div className="videoSidebar">

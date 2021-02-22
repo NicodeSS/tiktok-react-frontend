@@ -1,7 +1,7 @@
 .videoSidebar {
   position: absolute;
-  bottom: 60px;
-  right: 10px;
+  bottom: 75px;
+  right: 0px;
   color: white;
 }
 
@@ -24,3 +24,25 @@
   height: 100%;
   border-radius: 50%;
 }
+
+.videoSidebar_record {
+  animation: spinTheRecord infinite 5s linear;
+  height: 50px;
+  filter: invert(1);
+}
+
+@keyframes spinTheRecord {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.record {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
