@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
 import {getLives} from "../../api/live";
-import Live from "../../Live";
+import Live from "../../components/Live";
 import {LiveInfo} from '../../types/live'
 
 import "./index.css"
