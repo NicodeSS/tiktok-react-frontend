@@ -1,8 +1,8 @@
 .videoFooter {
     position: absolute;
     color: white;
-    bottom: 10px;
-    left: 10px;
+    bottom: 15px;
+    left: 15px;
     display: flex;
     width:60%;
 }
@@ -36,20 +36,3 @@
     padding-top: 7px;
 }
 
-.videoFooter_record {
-    animation: spinTheRecord infinite 5s linear;
-    height: 50px;
-    filter: invert(1);
-    position: absolute;
-    bottom: 0;
-    right: 20px;
-}
-
-@keyframes spinTheRecord {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}

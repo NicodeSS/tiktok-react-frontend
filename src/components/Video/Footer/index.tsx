@@ -4,9 +4,7 @@ import Ticker from "react-ticker";
 
 import "./index.css";
 
-const disc = './img/disc.png';
-
-function VideoFooter({author_nick, tagList, description, song, playing}):JSX.Element {
+function VideoFooter({author_nick, tagList, description, song, playing}): JSX.Element {
     return (
         <div className="videoFooter">
             <div className="videoFooter_text">
@@ -25,7 +23,7 @@ function VideoFooter({author_nick, tagList, description, song, playing}):JSX.Ele
                     </Ticker>
                 </div>
             </div>
-            <img className="videoFooter_record" src={disc} alt="disc" />
+
         </div>
     )
 }
