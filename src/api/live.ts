@@ -7,11 +7,10 @@ const getLives = (params={}) => {
 const getCommentsWS = (live_id: string)=>{
 
     let wsUrl = 'ws://182.61.20.79:8080?room=' + live_id //接口
-    console.log(wsUrl);
     let ws = new WebSocket(wsUrl); //建立websocket连接
 
     ws.onopen = function(evt) { //连接websocket触发该函数
-        console.log("匿名用户来到直播间");
+        console.log("匿名用户来到直播间"+live_id);
     };
 
     // ws.onmessage = function(evt) { //监听message事件，接收服务端实时传过来的数据
