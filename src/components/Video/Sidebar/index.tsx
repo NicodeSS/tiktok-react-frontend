@@ -5,7 +5,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import ShareIcon from '@material-ui/icons/Share';
 import numeral from "numeral";
 
-import "./VideoSidebar.css";
+import "./index.css";
 
 function VideoSidebar({ author_avatar, like, comment, share }):JSX.Element {
     const [liked, setLiked] = useState<boolean>(false);

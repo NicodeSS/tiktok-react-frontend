@@ -2,7 +2,7 @@ import React from "react";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import Ticker from "react-ticker";
 
-import "./VideoFooter.css";
+import "./index.css";
 
 const disc = './img/disc.png';
 

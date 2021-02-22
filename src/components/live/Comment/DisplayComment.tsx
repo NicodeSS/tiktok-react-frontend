@@ -1,5 +1,5 @@
 import React from 'react'
-import {getCommentsWS} from '../../api/live'
+import {getCommentsWS} from '../../../api/live'
 
 import './DisplayComment.css'
 import WriteComment from "./WriteComment";

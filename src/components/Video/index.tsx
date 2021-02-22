@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
-import VideoFooter from "./VideoFooter";
-import VideoSidebar from "./VideoSidebar";
+import VideoFooter from "./Footer";
+import VideoSidebar from "./Sidebar";
 import {useInView} from "react-intersection-observer";
 
-import "./Video.css";
+import "./index.css";
 
 function Video({videoInfo}):JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
