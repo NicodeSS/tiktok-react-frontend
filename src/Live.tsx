@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
 import AuthorInfo from "./components/live/AuthorInfo";
 import Description from "./components/live/Description";
-import DisplayComment from "./DisplayComment";
+import DisplayComment from "./components/live/DisplayComment";
 
 import "./Live.css"
 
