@@ -1,6 +1,6 @@
 import React from "react"
 import {Link} from "react-router-dom"
-import getLives from "../../api/live";
+import {getLives} from "../../api/live";
 import Live from "../../Live";
 import {LiveInfo} from '../../types/live'
 
@@ -38,9 +38,9 @@ class LivePage extends React.Component<any, any> {
                 <div className="app_lives">
                     <ul>
                         {
-                            this.state.lives.map((info: LiveInfo) => (
+                            this.state.lives.map((info: LiveInfo,index) => (
                                 <li key={info._id}>
-                                    <Live liveInfo={info}/>
+                                    <Live liveInfo={info} index={index}/>
                                 </li>
                             ))
                         }

@@ -4,6 +4,24 @@ const getLives = (params={}) => {
     return axios.get('/live/list',params)
 }
 
+const getCommentsWS = (live_id: string)=>{
+
+    let wsUrl = 'ws://182.61.20.79:8080?room=' + live_id //接口
+    let ws = new WebSocket(wsUrl); //建立websocket连接
+
+    ws.onopen = function(evt) { //连接websocket触发该函数
+        console.log("匿名用户来到直播间"+live_id);
+    };
+
+    // ws.onmessage = function(evt) { //监听message事件，接收服务端实时传过来的数据
+    //     // _this.comments.push(evt.data)
+    //     // console.log(comments);
+    // };
+
+    // ws.send("我是一条评论"); //发送评论到服务端
+    return ws;
+}
+
 const getLivesMocked = () => {
     return new Promise((resolve, reject) => {
         resolve(
@@ -31,4 +49,4 @@ const getLivesMocked = () => {
     })
 }
 
-export default getLives
+export {getLives,getCommentsWS}
