@@ -6,6 +6,7 @@ import DisplayComment from "./Comment/DisplayComment";
 
 import "./index.css"
 import {LiveInfo} from "../../types/live";
+import Mask from "../Player/Mask";
 
 interface Props {
     liveInfo: LiveInfo,
@@ -45,6 +46,10 @@ function Live({liveInfo, index}: Props): JSX.Element {
 
     return (
         <div className="live" ref={ref}>
+            {
+                inView && liveRef.current && liveRef.current.paused &&
+                <Mask/>
+            }
             <AuthorInfo info={liveInfo}/>
             <Description info={liveInfo}/>
             <video

@@ -6,7 +6,7 @@ import VideoSidebar from "./Sidebar";
 import {VideoInfo} from "../../types/video";
 
 import "./index.css";
-
+import Mask from "../Player/Mask";
 
 interface Props {
     videoInfo: VideoInfo,
@@ -94,6 +94,10 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
 
     return (
         <div className="video" ref={ref}>
+            {
+                inView && videoRef.current && videoRef.current.paused &&
+                <Mask/>
+            }
             <video
                 className="video-player"
                 loop
