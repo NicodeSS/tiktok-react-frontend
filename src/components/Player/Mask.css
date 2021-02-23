@@ -1,12 +1,22 @@
 .mask-container {
     position: absolute;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: .6s maskBgFadeIn;
+}
+
+@keyframes maskBgFadeIn {
+    from {
+        background: rgba(0, 0, 0, 0);
+    }
+    to {
+        background: rgba(0, 0, 0, 0.3);
+    }
 }
 
 .mask-icon {
@@ -17,4 +27,14 @@
     border-radius: 40px;
     align-items: center;
     justify-content: center;
+    animation: .6s maskIconFadeIn;
+}
+
+@keyframes maskIconFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
