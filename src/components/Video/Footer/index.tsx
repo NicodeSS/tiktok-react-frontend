@@ -19,7 +19,7 @@ function VideoFooter({author_nick, tagList, description, song, playing}: Props):
                 <h3>@{author_nick}</h3>
                 <strong>{("#" + tagList.join(" #"))}</strong>
                 <p>{description}</p>
-                <div className="videoFooter_ticker">
+                <div className="video-footer-ticker">
                     <MusicNoteIcon className="video-footer-icon"/>
                     <Ticker
                         mode="smooth"
