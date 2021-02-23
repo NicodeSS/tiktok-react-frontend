@@ -27,18 +27,18 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
     });
 
     // Click Event
-    const onVideoPress = (e): void => {
+    const onVideoPress = (e?): void => {
         e.preventDefault();
         try {
             const video = videoRef.current
             if (video.paused) {
                 let playPromise = video.play()
-                if(playPromise !== undefined)
-                    playPromise.catch(()=>console.log("Play Prevented"))
+                if (playPromise !== undefined)
+                    playPromise.catch(() => console.log("Play Prevented"))
             } else {
                 let pausePromise = video.pause()
-                if(pausePromise !== undefined)
-                    pausePromise.catch(()=>console.log("Pause Prevented"))
+                if (pausePromise !== undefined)
+                    pausePromise.catch(() => console.log("Pause Prevented"))
             }
             setPlaying(!video.paused)
         } catch (err) {
@@ -66,8 +66,8 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
                     playPromise.catch(() => console.log("Play Prevented"))
             } else {
                 let pausePromise = video.pause()
-                if(pausePromise !== undefined)
-                    pausePromise.catch(()=>console.log("Pause Prevented"))
+                if (pausePromise !== undefined)
+                    pausePromise.catch(() => console.log("Pause Prevented"))
             }
             setPlaying(!video.paused)
         } catch (err) {
@@ -95,15 +95,24 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
     }
 
     const handleTouchEnd = () => {
-        videoRef.current.currentTime = currentTime;
-        videoRef.current.play();
+        const video = videoRef.current
+        video.currentTime = currentTime
+        let playPromise = video.play()
+        if (playPromise !== undefined)
+            playPromise.catch(() => console.log("Play Prevented"))
+        setPlaying(!video.paused)
 
         videoPro.current.style.backgroundColor = "#fff4";
         videoPoi.current.style.display = "none";
     }
 
     const handleTouchStart = () => {
-        videoRef.current.pause();
+        const video = videoRef.current
+        let pausePromise = video.pause()
+        if (pausePromise !== undefined)
+            pausePromise.catch(() => console.log("Pause Prevented"))
+        setPlaying(!video.paused)
+
         videoPro.current.style.backgroundColor = "#fff";
         videoPoi.current.style.display = "inline-block";
     }
