@@ -5,9 +5,14 @@ import Description from "./Info/Description";
 import DisplayComment from "./Comment/DisplayComment";
 
 import "./index.css"
+import {LiveInfo} from "../../types/live";
 
+interface Props {
+    liveInfo: LiveInfo,
+    index: number
+}
 
-function Live({liveInfo, index}): JSX.Element {
+function Live({liveInfo, index}: Props): JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const liveRef = useRef<any>(null);
     const {ref, inView} = useInView({
@@ -15,7 +20,7 @@ function Live({liveInfo, index}): JSX.Element {
     });
 
     // Click Event
-    const onLivePress = (e) => {
+    const onLivePress = (e): void => {
         e.preventDefault();
         if (playing) {
             liveRef.current.pause();
@@ -27,7 +32,7 @@ function Live({liveInfo, index}): JSX.Element {
     }
 
     // Scroll Event Listener
-    useEffect(() => {
+    useEffect((): void => {
         if (inView) {
             liveRef.current.play();
             setPlaying(true);
@@ -43,7 +48,7 @@ function Live({liveInfo, index}): JSX.Element {
             <AuthorInfo info={liveInfo}/>
             <Description info={liveInfo}/>
             <video
-                className="live_player"
+                className="live-player"
                 playsInline
                 autoPlay
                 webkit-playsinline={"true"}
@@ -51,9 +56,8 @@ function Live({liveInfo, index}): JSX.Element {
                 ref={liveRef}
                 src={liveInfo.playUrl}
             />
-
             <DisplayComment
-                id={liveInfo._id}
+                _id={liveInfo._id}
             />
         </div>
     )

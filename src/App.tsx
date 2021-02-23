@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,7 +10,7 @@ import LivePage from "./views/Live"
 
 import "./App.css"
 
-function App() {
+function App(): JSX.Element {
     return (
         <Router>
             <div className={"app"}>
@@ -20,7 +20,7 @@ function App() {
                 </Switch>
             </div>
         </Router>
-    );
+    )
 }
 
 export default App

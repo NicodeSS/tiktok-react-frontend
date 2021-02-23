@@ -1,11 +1,20 @@
 import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
+import {useInView} from "react-intersection-observer";
+
 import VideoFooter from "./Footer";
 import VideoSidebar from "./Sidebar";
-import {useInView} from "react-intersection-observer";
+import {VideoInfo} from "../../types/video";
 
 import "./index.css";
 
-function Video({videoInfo, onLazyLoading, videoIdx}): JSX.Element {
+
+interface Props {
+    videoInfo: VideoInfo,
+    onLazyLoading: any,
+    index: number
+}
+
+function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [progressWidth, setProgressWidth] = useState<number>(0);
@@ -43,7 +52,7 @@ function Video({videoInfo, onLazyLoading, videoIdx}): JSX.Element {
         if (inView) {
             videoRef.current.play();
             setPlaying(true);
-            onLazyLoading(videoIdx);
+            onLazyLoading(index);
         } else {
             videoRef.current.pause();
             setPlaying(false);
@@ -86,7 +95,7 @@ function Video({videoInfo, onLazyLoading, videoIdx}): JSX.Element {
     return (
         <div className="video" ref={ref}>
             <video
-                className="video_player"
+                className="video-player"
                 loop
                 playsInline
                 webkit-playsinline={"true"}

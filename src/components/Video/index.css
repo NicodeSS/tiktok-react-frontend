@@ -5,7 +5,7 @@
     scroll-snap-align: start;
 }
 
-.video_player {
+.video-player {
     background-color: gray;
     height: 100%;
     object-fit: contain;
