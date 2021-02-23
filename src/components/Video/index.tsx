@@ -1,5 +1,6 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
+
 import VideoFooter from "./Footer";
 import VideoSidebar from "./Sidebar";
 import {VideoInfo} from "../../types/video";
@@ -15,7 +16,12 @@ interface Props {
 
 function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
+    const [currentTime, setCurrentTime] = useState<number>(0);
+    const [progressWidth, setProgressWidth] = useState<number>(0);
     const videoRef = useRef<any>(null);
+    const videoProOut = useRef<any>(null); // 视频总进度条
+    const videoPro = useRef<any>(null); // 视频进度条
+    const videoPoi = useRef<any>(null); // 视频进度点
     const {ref, inView} = useInView({
         threshold: 0.5,
     });
@@ -32,6 +38,15 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
         }
     }
 
+    // progress
+    const onVideoTimeUpdate = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
+        const percentage = 100 * videoRef.current.currentTime / videoRef.current.duration
+        if (inView) {
+            videoPro.current.style.width = percentage + '%';
+            videoPoi.current.style.left = percentage - 1 + '%';
+        }
+    };
+
     // Scroll state listener
     useEffect((): void => {
         if (inView) {
@@ -45,6 +60,38 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
 
     }, [inView]);
 
+    useEffect(() => {
+        setProgressWidth(videoProOut.current.clientWidth);
+    }, []);
+
+    const handleTouchMove = (e: any) => {
+        let offsetX = e.touches[0].clientX - videoPoi.current.offsetWidth;
+        if (offsetX < 0) {
+            offsetX = 0;
+        } else if (offsetX > progressWidth) {
+            offsetX = progressWidth;
+        }
+
+        let lineX = (offsetX * 100 / progressWidth).toFixed(1);
+        videoPro.current.style.width = lineX + '%';
+        videoPoi.current.style.left = lineX + '%';
+        setCurrentTime(Number.parseFloat(lineX) * videoRef.current.duration / 100);
+    }
+
+    const handleTouchEnd = () => {
+        videoRef.current.currentTime = currentTime;
+        videoRef.current.play();
+
+        videoPro.current.style.backgroundColor = "#fff4";
+        videoPoi.current.style.display = "none";
+    }
+
+    const handleTouchStart = () => {
+        videoRef.current.pause();
+        videoPro.current.style.backgroundColor = "#fff";
+        videoPoi.current.style.display = "inline-block";
+    }
+
     return (
         <div className="video" ref={ref}>
             <video
@@ -56,7 +103,35 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
                 ref={videoRef}
                 src={videoInfo.videoUrl}
                 poster={videoInfo.imgUrl}
+                onTimeUpdate={onVideoTimeUpdate}
             />
+
+            <div className="video_control">
+                <div
+                    className="video_control-bg"
+                    onTouchMove={handleTouchMove}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                >
+                    <div
+                        className="all_video_progress"
+                        ref={videoProOut}
+                    >
+                    <span
+                        className="video_progress"
+                        ref={videoPro}
+                    />
+                        <span
+                            className="video_progress_point"
+                            id="point"
+                            ref={videoPoi}
+                            onTouchMove={handleTouchMove}
+                            onTouchStart={handleTouchStart}
+                            onTouchEnd={handleTouchEnd}
+                        />
+                    </div>
+                </div>
+            </div>
 
             <VideoFooter
                 author_nick={videoInfo.author_nick}
