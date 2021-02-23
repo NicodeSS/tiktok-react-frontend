@@ -59,6 +59,7 @@ function Video({videoInfo, onLazyLoading, videoIdx}):JSX.Element {
             />
 
             <VideoSidebar
+                _id={videoInfo._id}
                 author_avatar={videoInfo.author_avatar}
                 like={videoInfo.like}
                 comment={videoInfo.comment}
