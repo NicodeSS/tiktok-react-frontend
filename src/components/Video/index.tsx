@@ -1,12 +1,12 @@
 import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
-
 import VideoFooter from "./Footer";
 import VideoSidebar from "./Sidebar";
 import {VideoInfo} from "../../types/video";
+import Mask from "../Player/Mask";
 
 import "./index.css";
-import Mask from "../Player/Mask";
+
 
 interface Props {
     videoInfo: VideoInfo,

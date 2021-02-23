@@ -8,14 +8,13 @@ import "./index.css"
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 
 // modify limit of a page
-const PAGELIMIT = 5;
+const PAGE_LIMIT = 5;
 
 interface Props {
 }
 
 interface States {
     videos: Array<VideoInfo>,
-    offset: number
 }
 
 class VideoPage extends React.Component<Props, States> {
@@ -23,14 +22,13 @@ class VideoPage extends React.Component<Props, States> {
         super(props);
         this.state = {
             videos: [],
-            offset: 0
         };
         this.handleLazyLoading = this.handleLazyLoading.bind(this);
     }
 
     async componentDidMount() {
         try {
-            let response = await videos_list({limit: PAGELIMIT, offset: this.state.offset});
+            let response = await videos_list({limit: PAGE_LIMIT, offset:0});
             const videos: Array<VideoInfo> = response.data.videos;
             this.setState({videos})
         } catch (error) {
@@ -41,14 +39,17 @@ class VideoPage extends React.Component<Props, States> {
 
     async handleLazyLoading(index: number) {
         if ((index + 2) === this.state.videos.length) {
-            const offset = this.state.offset + PAGELIMIT;
-            const res = await videos_list({limit: PAGELIMIT, offset: offset});
-            const resVideos = res.data.videos;
-            const videos: Array<VideoInfo> = this.state.videos;
-            this.setState({
-                videos: videos.concat(resVideos),
-                offset: offset
-            });
+            try {
+                const offset = this.state.videos.length
+                let response = await videos_list({limit: PAGE_LIMIT, offset: offset});
+                let videos:Array<VideoInfo> = response.data.videos;
+                videos = this.state.videos.concat(videos)
+                this.setState({
+                    videos
+                });
+            } catch (err) {
+                console.error(err)
+            }
         }
     }
 
