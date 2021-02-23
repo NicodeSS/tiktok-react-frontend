@@ -1,41 +1,41 @@
 .videos_container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .app_videos {
-    position: relative;
-    height: 100%;
-    max-width: 900px;
-    overflow: scroll;
-    scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
+  position: relative;
+  height: 100%;
+  max-width: 1000px;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
 }
 
 .app_videos > ul {
-    list-style: none;
-    padding: 0;
-    height: 100%;
+  list-style: none;
+  padding: 0;
+  height: 100%;
 }
 
 .app_videos > ul > li {
-    height: 100%;
+  height: 100%;
 }
 
 .app_videos::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .app_videos {
-    -ms-overflow-style: none;
+  -ms-overflow-style: none;
 }
 
 .live-btn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 9;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 9;
 }
