@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom"
-import getVideos from "../../api/video";
+import {getVideos} from "../../api/video";
 import Video from "../../components/Video";
 import {VideoInfo} from '../../types/video'
 
