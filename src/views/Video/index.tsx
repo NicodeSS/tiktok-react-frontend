@@ -8,7 +8,7 @@ import "./index.css"
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 
 // modify limit of a page
-const PAGELIMIT = 10;
+const PAGELIMIT = 5;
 
 class VideoPage extends React.Component<any, any> {
     constructor(props) {
