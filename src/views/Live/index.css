@@ -1,11 +1,11 @@
-.lives_container {
+.lives-container {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100%;
 }
 
-.app_lives {
+.lives {
     position: relative;
     height: 100%;
     max-width: 100%;
@@ -15,25 +15,25 @@
     white-space: nowrap;
 }
 
-.app_lives > ul {
+.lives > ul {
     list-style: none;
     padding: 0;
     height: 100%;
 }
 
-.app_lives > ul > li {
+.lives > ul > li {
     height: 100%;
 }
 
-.app_lives::-webkit-scrollbar {
+.lives::-webkit-scrollbar {
     display: none;
 }
 
-.app_lives {
+.lives {
     -ms-overflow-style: none;
 }
 
-.close-btn {
+.lives-btn-close {
     position: absolute;
     top: 15px;
     right: 15px;

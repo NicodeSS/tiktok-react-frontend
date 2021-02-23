@@ -3,55 +3,53 @@ import SendIcon from '@material-ui/icons/Send';
 import './WriteComment.css'
 import {IconButton} from "@material-ui/core";
 
-class WriteComment extends React.Component<any, any> {
-    private ws: any;
+interface Props {
+    ws: WebSocket
+}
+
+interface States {
+    focused: boolean
+}
+
+class WriteComment extends React.Component<Props, States> {
     private commentInput: any;
     private winHeight: number;
     private input: any;
 
-    constructor(props) {
+    constructor(props:Props) {
         super(props);
         this.input = null;
         this.commentInput = null;
         this.winHeight = 0;
         this.state = {focused: false};
-        this.ws = props.ws;
 
         this.handleInputClick = this.handleInputClick.bind(this)
         this.handleInputClose = this.handleInputClose.bind(this)
         this.sendComment = this.sendComment.bind(this)
     }
 
-    handleInputClick(event: any) {
+    handleInputClick(event: any):void {
         this.setState({focused: true})
     }
 
 
-    handleInputClose(event: any) {
+    handleInputClose(event: any):void {
         this.setState({focused: false})
     }
 
-    sendComment(event: any) {
-        this.ws.send(this.input.value);
+    sendComment(event: any):void {
+        this.props.ws.send(this.input.value);
         this.handleInputClose({})
     }
 
     componentDidMount() {
-
         const root: any = document.querySelector("body")
         this.winHeight = window.outerHeight;
         if (root)
             root.style.minHeight = this.winHeight + "px";
 
         window.addEventListener('resize', () => {
-
-            const current = this.commentInput;
-            if (window.outerHeight < this.winHeight) {
-                let keyboardHeight = this.winHeight - window.outerHeight;
-
-                // if(current)
-                //     current.style.bottom = 0 + 'px';
-            } else {
+            if (window.outerHeight >= this.winHeight){
                 const input = document.querySelector('input')
                 if (input)
                     input.blur();
@@ -63,7 +61,7 @@ class WriteComment extends React.Component<any, any> {
         return (
             (this.state.focused) ?
                 <div
-                    className="commentInputArea"
+                    className="comment-input-area"
                     ref={e => this.commentInput = e}
                 >
                     <input
@@ -75,7 +73,7 @@ class WriteComment extends React.Component<any, any> {
                     />
                     <IconButton
                         onMouseDown={this.sendComment}
-                        className="sendCommentIcon"
+                        className="comment-icon-send"
                     >
                         <SendIcon/>
                     </IconButton>
@@ -86,7 +84,6 @@ class WriteComment extends React.Component<any, any> {
                 </div>
         )
     }
-
 }
 
 export default WriteComment;

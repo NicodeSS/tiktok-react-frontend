@@ -1,19 +1,27 @@
 import React, {useEffect, useRef, useState} from "react";
+import {useInView} from "react-intersection-observer";
 import VideoFooter from "./Footer";
 import VideoSidebar from "./Sidebar";
-import {useInView} from "react-intersection-observer";
+import {VideoInfo} from "../../types/video";
 
 import "./index.css";
 
-function Video({videoInfo, onLazyLoading, videoIdx}):JSX.Element {
+
+interface Props {
+    videoInfo: VideoInfo,
+    onLazyLoading: any,
+    index: number
+}
+
+function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const videoRef = useRef<any>(null);
-    const { ref, inView } = useInView({
+    const {ref, inView} = useInView({
         threshold: 0.5,
     });
 
     // Click Event
-    const onVideoPress = (e):void => {
+    const onVideoPress = (e): void => {
         e.preventDefault();
         if (playing) {
             videoRef.current.pause();
@@ -25,11 +33,11 @@ function Video({videoInfo, onLazyLoading, videoIdx}):JSX.Element {
     }
 
     // Scroll state listener
-    useEffect(():void => {
+    useEffect((): void => {
         if (inView) {
             videoRef.current.play();
             setPlaying(true);
-            onLazyLoading(videoIdx);
+            onLazyLoading(index);
         } else {
             videoRef.current.pause();
             setPlaying(false);
@@ -40,7 +48,7 @@ function Video({videoInfo, onLazyLoading, videoIdx}):JSX.Element {
     return (
         <div className="video" ref={ref}>
             <video
-                className="video_player"
+                className="video-player"
                 loop
                 playsInline
                 webkit-playsinline={"true"}

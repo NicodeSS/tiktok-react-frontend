@@ -11,92 +11,92 @@ let http = axios.create({
 http.interceptors.request.use(
     config => {
         if (config.method === "POST") {
-            config.headers["Content-Type"] = "application/json;charset=utf-8";
+            config.headers["Content-Type"] = "application/json;charset=utf-8"
         }
-        return config;
+        return config
     },
     error => {
-        alert("错误的传参");
-        return Promise.reject(error);
+        alert("错误的传参")
+        return Promise.reject(error)
     }
-);
+)
 
 let methods = {
-    get: function(url:string, params={}):Promise<any> {
+    get: function (url: string, params = {}): Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "GET",
                 url: url,
                 params: params
             })
-                .then(function(res) {
-                     resolve(res)
+                .then(function (res) {
+                    resolve(res)
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     reject(err)
-                });
-        });
+                })
+        })
     },
-    post: function(url:string, params:object):Promise<any> {
+    post: function (url: string, params: object): Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "POST",
                 url: url,
                 data: params
             })
-                .then(function(res) {
+                .then(function (res) {
                     resolve(res)
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     reject(err)
-                });
-        });
+                })
+        })
     },
-    put: function(url:string, params:object):Promise<any> {
+    put: function (url: string, params: object): Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "PUT",
                 url: url,
                 data: params
             })
-                .then(function(res) {
+                .then(function (res) {
                     resolve(res)
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     reject(err)
-                });
-        });
+                })
+        })
     },
-    delete: function(url:string, params={}):Promise<any> {
+    delete: function (url: string, params = {}): Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "DELETE",
                 url: url,
                 params: params
             })
-                .then(function(res) {
+                .then(function (res) {
                     resolve(res)
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     reject(err)
-                });
-        });
+                })
+        })
     },
-    patch: function(url:string, params:object):Promise<any> {
+    patch: function (url: string, params: object): Promise<any> {
         return new Promise((resolve, reject) => {
             http({
                 method: "PATCH",
                 url: url,
                 data: params
             })
-                .then(function(res) {
+                .then(function (res) {
                     resolve(res)
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     reject(err)
-                });
-        });
+                })
+        })
     }
-};
+}
 
 export default methods;

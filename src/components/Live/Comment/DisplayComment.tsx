@@ -1,20 +1,30 @@
 import React from 'react'
 import {getCommentsWS} from '../../../api/live'
-
-import './DisplayComment.css'
 import WriteComment from "./WriteComment";
 
-interface CommentApi {
+import './DisplayComment.css'
+
+interface Comment {
     userName: string;
     comment: string;
 }
 
-class DisplayComment extends React.Component<any, any> {
+interface Props {
+    _id: string
+}
+
+interface States {
+    displayComment: Array<Comment>,
+    scrollLock: boolean,
+    unread: number,
+}
+
+class DisplayComment extends React.Component<Props, States> {
     private list: React.RefObject<unknown>;
     private comments: any;
-    private ws: WebSocket | null;
+    private ws: WebSocket;
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.comments = [];
         this.list = React.createRef();
@@ -32,14 +42,14 @@ class DisplayComment extends React.Component<any, any> {
             scrollLock: false,
             unread: 3,
         };
-        this.ws = getCommentsWS(props.id);
+        this.ws = getCommentsWS(props._id);
         this.ws.onmessage = (evt) => {
             this.comments.push(evt.data);
 
             // Cache, to avoid poping up too frequently
-            let len = this.comments.length;
+            let len: number = this.comments.length;
             if (len > 0) {
-                const timer = setInterval(() => {
+                const timer = setInterval((): void => {
                     this.setState({
                         displayComment: [...this.state.displayComment, {
                             userName: '匿名用户',
@@ -57,16 +67,14 @@ class DisplayComment extends React.Component<any, any> {
         this.handleUnreadClick = this.handleUnreadClick.bind(this)
     }
 
-    getSnapshotBeforeUpdate() {
+    getSnapshotBeforeUpdate(): number | null {
         const node: any = this.list.current;
-        if ((node.offsetHeight + node.scrollTop) - node.scrollHeight > -0.5) {
+        if ((node.offsetHeight + node.scrollTop) - node.scrollHeight > -0.5)
             return 0;
-        }
-
         return null;
     }
 
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         const node: any = this.list.current;
         let scrollDowned: boolean = node.scrollTop + node.offsetHeight >= node.scrollHeight;
         if (snapshot === 0)
@@ -74,10 +82,9 @@ class DisplayComment extends React.Component<any, any> {
 
         if (!this.state.scrollLock && !scrollDowned)
             node.scroll(0, Number.MAX_SAFE_INTEGER)
-
     }
 
-    handleScrollEvent(event:any) {
+    handleScrollEvent(event: any): void {
         const node: any = this.list.current;
         let scrollDowned: boolean = node.scrollTop + node.offsetHeight >= node.scrollHeight;
         if (scrollDowned && this.state.scrollLock)
@@ -89,7 +96,7 @@ class DisplayComment extends React.Component<any, any> {
             this.setState({scrollLock: true})
     }
 
-    handleUnreadClick(event) {
+    handleUnreadClick(event: any): void {
         const node: any = this.list.current;
         let scrollDowned: boolean = node.scrollTop + node.offsetHeight >= node.scrollHeight;
         if (!scrollDowned)
@@ -100,14 +107,13 @@ class DisplayComment extends React.Component<any, any> {
         return (
             <div className="comment-area">
                 <div className="comment-container">
-
                     <div className="comment-display" ref={this.list as React.RefObject<HTMLDivElement>}
                          onScroll={this.handleScrollEvent}>
                         {
                             this.state.displayComment.length > 0 &&
                             this.state.displayComment.map(({userName, comment}, index) =>
                                 <div key={index}
-                                     className={["oneCommentArea", (index === this.state.displayComment.length - 1) ? "comment-slide" : null].join(' ')}>
+                                     className={["comment-area-single", (index === this.state.displayComment.length - 1) ? "comment-slide" : null].join(' ')}>
                                     <p className="comment">
                                         <span className="username">{userName}: </span>{comment}
                                     </p>

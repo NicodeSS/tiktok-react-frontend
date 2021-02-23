@@ -15,3 +15,7 @@ export interface VideoInfo {
     share: number
 }
 
+export interface VideosListParams {
+    limit?: number,
+    offset?: number
+}

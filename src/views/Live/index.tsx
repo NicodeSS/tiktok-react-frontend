@@ -7,8 +7,15 @@ import {LiveInfo} from '../../types/live'
 import "./index.css"
 import CloseIcon from "@material-ui/icons/Close";
 
-class LivePage extends React.Component<any, any> {
-    constructor(props) {
+interface Props {
+}
+
+interface States {
+    lives: Array<LiveInfo>
+}
+
+class LivePage extends React.Component<Props, States> {
+    constructor(props: Props) {
         super(props);
         this.state = {lives: []};
     }
@@ -24,21 +31,21 @@ class LivePage extends React.Component<any, any> {
         }
     }
 
-    render():JSX.Element {
+    render(): JSX.Element {
         return (
-            <div className="lives_container">
+            <div className="lives-container">
                 <Link to="/">
-                    <div className="close-btn">
+                    <div className="lives-btn-close">
                         <CloseIcon
                             fontSize={"large"}
                             htmlColor={"white"}
-                        ></CloseIcon>
+                        />
                     </div>
                 </Link>
-                <div className="app_lives">
+                <div className="lives">
                     <ul>
                         {
-                            this.state.lives.map((info: LiveInfo,index) => (
+                            this.state.lives.map((info: LiveInfo, index: number) => (
                                 <li key={info._id}>
                                     <Live liveInfo={info} index={index}/>
                                 </li>
