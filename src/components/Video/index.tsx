@@ -29,12 +29,20 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
     // Click Event
     const onVideoPress = (e): void => {
         e.preventDefault();
-        if (playing) {
-            videoRef.current.pause();
-            setPlaying(false);
-        } else {
-            videoRef.current.play();
-            setPlaying(true);
+        try {
+            const video = videoRef.current
+            if (video.paused) {
+                let playPromise = video.play()
+                if(playPromise !== undefined)
+                    playPromise.catch(()=>console.log("Play Prevented"))
+            } else {
+                let pausePromise = video.pause()
+                if(pausePromise !== undefined)
+                    pausePromise.catch(()=>console.log("Pause Prevented"))
+            }
+            setPlaying(!video.paused)
+        } catch (err) {
+            console.error(err)
         }
     }
 
@@ -49,13 +57,21 @@ function Video({videoInfo, onLazyLoading, index}: Props): JSX.Element {
 
     // Scroll state listener
     useEffect((): void => {
-        if (inView) {
-            videoRef.current.play();
-            setPlaying(true);
-            onLazyLoading(index);
-        } else {
-            videoRef.current.pause();
-            setPlaying(false);
+        try {
+            let video = videoRef.current
+            if (inView) {
+                onLazyLoading(index);
+                let playPromise = video.play()
+                if (playPromise !== undefined)
+                    playPromise.catch(() => console.log("Play Prevented"))
+            } else {
+                let pausePromise = video.pause()
+                if(pausePromise !== undefined)
+                    pausePromise.catch(()=>console.log("Pause Prevented"))
+            }
+            setPlaying(!video.paused)
+        } catch (err) {
+            console.error(err)
         }
 
     }, [inView]);

@@ -23,23 +23,39 @@ function Live({liveInfo, index}: Props): JSX.Element {
     // Click Event
     const onLivePress = (e): void => {
         e.preventDefault();
-        if (playing) {
-            liveRef.current.pause();
-            setPlaying(false);
-        } else {
-            liveRef.current.play();
-            setPlaying(true);
+        try {
+            let live = liveRef.current
+            if (live.paused) {
+                let playPromise = live.play()
+                if (playPromise !== undefined)
+                    playPromise.catch(() => console.log("Play Prevented"))
+            } else {
+                let pausePromise = live.pause()
+                if (pausePromise !== undefined)
+                    pausePromise.catch(() => console.log("Pause Prevented"))
+            }
+            setPlaying(!live.paused)
+        } catch (err) {
+            console.error(err)
         }
     }
 
     // Scroll Event Listener
     useEffect((): void => {
-        if (inView) {
-            liveRef.current.play();
-            setPlaying(true);
-        } else {
-            liveRef.current.pause();
-            setPlaying(false);
+        try {
+            let live = liveRef.current
+            if (inView) {
+                let playPromise = live.play()
+                if (playPromise !== undefined)
+                    playPromise.catch(() => console.log("Play Prevented"))
+            } else {
+                let pausePromise = live.pause()
+                if (pausePromise !== undefined)
+                    pausePromise.catch(() => console.log("Pause Prevented"))
+            }
+            setPlaying(!live.paused)
+        } catch (err) {
+            console.error(err)
         }
 
     }, [inView]);
