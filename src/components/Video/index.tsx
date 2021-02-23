@@ -5,7 +5,7 @@ import {useInView} from "react-intersection-observer";
 
 import "./index.css";
 
-function Video({videoInfo}):JSX.Element {
+function Video({videoInfo, onLazyLoading, videoIdx}):JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const videoRef = useRef<any>(null);
     const { ref, inView } = useInView({
@@ -29,6 +29,7 @@ function Video({videoInfo}):JSX.Element {
         if (inView) {
             videoRef.current.play();
             setPlaying(true);
+            onLazyLoading(videoIdx);
         } else {
             videoRef.current.pause();
             setPlaying(false);
