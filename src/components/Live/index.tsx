@@ -10,10 +10,11 @@ import Mask from "../Player/Mask";
 
 interface Props {
     liveInfo: LiveInfo,
-    index: number
+    index: number,
+    onLazyLoading: any
 }
 
-function Live({liveInfo, index}: Props): JSX.Element {
+function Live({liveInfo, index, onLazyLoading}: Props): JSX.Element {
     const [playing, setPlaying] = useState<boolean>(false);
     const liveRef = useRef<any>(null);
     const {ref, inView} = useInView({
@@ -43,6 +44,7 @@ function Live({liveInfo, index}: Props): JSX.Element {
     // Scroll Event Listener
     useEffect((): void => {
         try {
+            onLazyLoading(index)
             let live = liveRef.current
             if (inView) {
                 let playPromise = live.play()
@@ -71,7 +73,7 @@ function Live({liveInfo, index}: Props): JSX.Element {
             <video
                 className="live-player"
                 playsInline
-                autoPlay
+                // preload="none"
                 webkit-playsinline={"true"}
                 onClick={onLivePress}
                 ref={liveRef}

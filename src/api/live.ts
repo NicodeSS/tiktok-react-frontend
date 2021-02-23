@@ -1,10 +1,11 @@
 import axios from "../utils/axios"
+import {LivesListParams} from "../types/live";
 
-export const getLives = (params = {}) => {
+export const lives_list = (params:LivesListParams = {}) => {
     return axios.get('/live/list', params)
 }
 
-export const getCommentsWS = (live_id: string) => {
+export const websocket_create = (live_id: string) => {
 
     let wsUrl = 'ws://182.61.20.79:8080?room=' + live_id //接口
     let ws = new WebSocket(wsUrl); //建立websocket连接
@@ -31,7 +32,7 @@ export const getCommentsWS = (live_id: string) => {
     return ws;
 }
 
-export const getLivesMocked = () => {
+export const lives_list_mocked = () => {
     return new Promise((resolve) => {
         resolve(
             [

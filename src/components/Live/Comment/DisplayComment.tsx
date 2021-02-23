@@ -1,5 +1,5 @@
 import React from 'react'
-import {getCommentsWS} from '../../../api/live'
+import {websocket_create} from '../../../api/live'
 import WriteComment from "./WriteComment";
 
 import './DisplayComment.css'
@@ -42,7 +42,7 @@ class DisplayComment extends React.Component<Props, States> {
             scrollLock: false,
             unread: 3,
         };
-        this.ws = getCommentsWS(props._id);
+        this.ws = websocket_create(props._id);
         this.ws.onmessage = (evt) => {
             this.comments.push(evt.data);
 
