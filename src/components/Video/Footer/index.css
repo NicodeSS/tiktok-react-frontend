@@ -8,12 +8,15 @@
 }
 
 .video-footer-text {
+    width:100%;
     flex: 1;
 }
 
 .video-footer-text > p {
+    width: 100%;
+    white-space: normal;
+    word-break: break-all;
     padding-bottom: 20px;
-    padding-right: 40px;
     font-size: 14px;
 }
 
