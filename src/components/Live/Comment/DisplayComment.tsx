@@ -63,7 +63,7 @@ class DisplayComment extends React.Component<Props, States> {
                 }, 500);
             }
         }
-        this.handleScrollEvent = this.handleScrollEvent.bind(this)
+        this.handleCommentAreaScroll = this.handleCommentAreaScroll.bind(this)
         this.handleUnreadClick = this.handleUnreadClick.bind(this)
     }
 
@@ -76,7 +76,7 @@ class DisplayComment extends React.Component<Props, States> {
 
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         const node: any = this.list.current;
-        let scrollDowned: boolean = node.scrollTop + node.offsetHeight >= node.scrollHeight;
+        let scrollDowned: boolean = Math.ceil(node.scrollTop) + node.offsetHeight >= node.scrollHeight;
         if (snapshot === 0)
             node.scrollTop = node.scrollHeight - node.offsetHeight;
 
@@ -84,15 +84,15 @@ class DisplayComment extends React.Component<Props, States> {
             node.scroll(0, Number.MAX_SAFE_INTEGER)
     }
 
-    handleScrollEvent(event: any): void {
+    handleCommentAreaScroll(event: any): void {
         const node: any = this.list.current;
-        let scrollDowned: boolean = node.scrollTop + node.offsetHeight >= node.scrollHeight;
-        if (scrollDowned && this.state.scrollLock)
+        let scrollDowned: boolean = Math.ceil(node.scrollTop) + node.offsetHeight >= node.scrollHeight;
+        if (scrollDowned)
             this.setState({
                 scrollLock: false,
                 unread: 0
             })
-        else if (!this.state.scrollLock)
+        else
             this.setState({scrollLock: true})
     }
 
@@ -108,7 +108,8 @@ class DisplayComment extends React.Component<Props, States> {
             <div className="comment-area">
                 <div className="comment-container">
                     <div className="comment-display" ref={this.list as React.RefObject<HTMLDivElement>}
-                         onScroll={this.handleScrollEvent}>
+                         onScroll={this.handleCommentAreaScroll}
+                    >
                         {
                             this.state.displayComment.length > 0 &&
                             this.state.displayComment.map(({userName, comment}, index) =>
