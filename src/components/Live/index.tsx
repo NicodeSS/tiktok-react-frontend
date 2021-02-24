@@ -15,7 +15,6 @@ interface Props {
 }
 
 function Live({liveInfo, index, onLazyLoading}: Props): JSX.Element {
-    const [playing, setPlaying] = useState<boolean>(false);
     const liveRef = useRef<any>(null);
     const {ref, inView} = useInView({
         threshold: 0.5,
@@ -35,7 +34,6 @@ function Live({liveInfo, index, onLazyLoading}: Props): JSX.Element {
                 if (pausePromise !== undefined)
                     pausePromise.catch(() => console.log("Pause Prevented"))
             }
-            setPlaying(!live.paused)
         } catch (err) {
             console.error(err)
         }
@@ -55,7 +53,6 @@ function Live({liveInfo, index, onLazyLoading}: Props): JSX.Element {
                 if (pausePromise !== undefined)
                     pausePromise.catch(() => console.log("Pause Prevented"))
             }
-            setPlaying(!live.paused)
         } catch (err) {
             console.error(err)
         }
