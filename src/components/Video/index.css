@@ -6,7 +6,7 @@
 }
 
 .video-player {
-    background-color: gray;
+    background-color: black;
     height: 100%;
     object-fit: contain;
 }
