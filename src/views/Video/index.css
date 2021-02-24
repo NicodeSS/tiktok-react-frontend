@@ -1,39 +1,39 @@
-.videos_container {
+.videos-container {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100%;
 }
 
-.app_videos {
+.videos {
     position: relative;
     height: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     overflow: scroll;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
 }
 
-.app_videos > ul {
+.videos > ul {
     list-style: none;
     padding: 0;
     height: 100%;
 }
 
-.app_videos > ul > li {
+.videos > ul > li {
     height: 100%;
 }
 
-.app_videos::-webkit-scrollbar {
+.videos::-webkit-scrollbar {
     display: none;
 }
 
-.app_videos {
+.videos {
     -ms-overflow-style: none;
 }
 
-.live-btn {
+.videos-btn-live {
     position: absolute;
     top: 15px;
     left: 15px;

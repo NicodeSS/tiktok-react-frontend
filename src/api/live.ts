@@ -1,17 +1,26 @@
 import axios from "../utils/axios"
+import {LivesListParams} from "../types/live";
 
-const getLives = (params={}) => {
-    return axios.get('/live/list',params)
+export const lives_list = (params:LivesListParams = {}) => {
+    return axios.get('/live/list', params)
 }
 
-const getCommentsWS = (live_id: string)=>{
+export const websocket_create = (live_id: string) => {
 
     let wsUrl = 'ws://182.61.20.79:8080?room=' + live_id //接口
-    console.log(wsUrl);
     let ws = new WebSocket(wsUrl); //建立websocket连接
 
-    ws.onopen = function(evt) { //连接websocket触发该函数
-        console.log("匿名用户来到直播间");
+    ws.onopen = function (evt) { //连接websocket触发该函数
+        console.log("匿名用户来到直播间" + live_id)
+    };
+
+    ws.onclose = function (evt) {
+        console.log("匿名用户离开了直播间" + live_id)
+    }
+
+    ws.onerror = function (err) {
+        console.error('Websocket encountered error: ', err, 'Closing socket');
+        ws.close();
     };
 
     // ws.onmessage = function(evt) { //监听message事件，接收服务端实时传过来的数据
@@ -23,7 +32,7 @@ const getCommentsWS = (live_id: string)=>{
     return ws;
 }
 
-const getLiveLikeWs = (live_id:string)=>{
+export const getLiveLikeWs = (live_id:string)=>{
     let wsUrl = 'ws://182.61.20.79:8081?room=' + live_id //接口
     let ws = new WebSocket(wsUrl); //建立websocket连接
 
@@ -34,8 +43,9 @@ const getLiveLikeWs = (live_id:string)=>{
     return ws;
 }
 
-const getLivesMocked = () => {
-    return new Promise((resolve, reject) => {
+export const lives_list_mocked = () => {
+    return new Promise((resolve) => {
+
         resolve(
             [
                 {
@@ -60,5 +70,3 @@ const getLivesMocked = () => {
         )
     })
 }
-
-export {getLives,getCommentsWS,getLiveLikeWs}

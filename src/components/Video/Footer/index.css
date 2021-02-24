@@ -1,0 +1,39 @@
+.video-footer {
+    position: absolute;
+    color: white;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    width: 60%;
+}
+
+.video-footer-text {
+    width:100%;
+    flex: 1;
+}
+
+.video-footer-text > p {
+    width: 100%;
+    white-space: normal;
+    word-break: break-all;
+    padding-bottom: 20px;
+    font-size: 14px;
+}
+
+.video-footer-icon {
+    position: absolute;
+}
+
+.video-footer-text > h3 {
+    padding-bottom: 20px;
+}
+
+.video-footer-ticker > .ticker {
+    white-space: nowrap;
+    height: fit-content;
+    margin-left: 30px;
+}
+
+.video-footer-ticker h1 {
+    padding-top: 7px;
+}

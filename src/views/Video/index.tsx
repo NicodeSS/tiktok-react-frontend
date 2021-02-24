@@ -1,24 +1,35 @@
 import React from "react";
 import {Link} from "react-router-dom"
-import getVideos from "../../api/video";
-import Video from "../../Video";
+import {videos_list} from "../../api/video";
+import Video from "../../components/Video";
 import {VideoInfo} from '../../types/video'
 
 import "./index.css"
 import LiveTvIcon from "@material-ui/icons/LiveTv";
 
-class VideoPage extends React.Component<any, any> {
-    constructor(props) {
+// modify limit of a page
+const PAGE_LIMIT = 5;
+
+interface Props {
+}
+
+interface States {
+    videos: Array<VideoInfo>,
+}
+
+class VideoPage extends React.Component<Props, States> {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            videos: []
+            videos: [],
         };
+        this.handleLazyLoading = this.handleLazyLoading.bind(this);
     }
 
     async componentDidMount() {
         try {
-            let response = await getVideos();
-            const videos : Array<VideoInfo> = response.data.videos;
+            let response = await videos_list({limit: PAGE_LIMIT, offset:0});
+            const videos: Array<VideoInfo> = response.data.videos;
             this.setState({videos})
         } catch (error) {
             console.error(error)
@@ -26,24 +37,42 @@ class VideoPage extends React.Component<any, any> {
         }
     }
 
+    async handleLazyLoading(index: number) {
+        if ((index + 2) === this.state.videos.length) {
+            try {
+                const offset = this.state.videos.length
+                let response = await videos_list({limit: PAGE_LIMIT, offset: offset});
+                let videos:Array<VideoInfo> = response.data.videos;
+                videos = this.state.videos.concat(videos)
+                this.setState({
+                    videos
+                });
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
+
     render(): JSX.Element {
         return (
-            <div className="videos_container">
+            <div className="videos-container">
                 <Link to="/live">
-                    <div className="live-btn">
+                    <div className="videos-btn-live">
                         <LiveTvIcon
                             fontSize={"large"}
                             htmlColor={"white"}
-                        ></LiveTvIcon>
+                        />
                     </div>
                 </Link>
-                <div className="app_videos">
+                <div className="videos">
                     <ul>
                         {
-                            this.state.videos.map((info: VideoInfo) => (
+                            this.state.videos.map((info: VideoInfo, index: number) => (
                                 <li key={info._id}>
                                     <Video
                                         videoInfo={info}
+                                        onLazyLoading={this.handleLazyLoading}
+                                        index={index}
                                     />
                                 </li>
                             ))
@@ -51,7 +80,7 @@ class VideoPage extends React.Component<any, any> {
                     </ul>
                 </div>
             </div>
-        );
+        )
     }
 }
 

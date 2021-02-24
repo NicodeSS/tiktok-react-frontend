@@ -1,12 +1,16 @@
-.video {
+.live {
     position: relative;
-    background-color: white;
+    background-color: black;
+    max-width: 100%;
     height: 100%;
     scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
 }
 
-.video_player {
+.live-player {
     background-color: gray;
+    max-width: 100%;
     height: 100%;
     object-fit: contain;
 }

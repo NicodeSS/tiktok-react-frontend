@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import './AuthorInfo.css';
 
-function AuthorInfo (props) {
+function AuthorInfo(props) {
     const info = props.info;
     const avatar = info.author_avatar;
     const nick = info.author_nick;
@@ -17,7 +17,7 @@ function AuthorInfo (props) {
             </div>
         </div>
     );
-    
+
 }
 
 export default AuthorInfo;

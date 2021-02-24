@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useInView} from "react-intersection-observer";
-import AuthorInfo from "./components/live/AuthorInfo";
-import Description from "./components/live/Description";
-import LiveLike from "./components/live/LiveLike"
-import DisplayComment from "./components/live/DisplayComment";
+import AuthorInfo from "./components/live/Info/AuthorInfo";
+import Description from "./components/live/Info/Description";
+import LiveLike from "./components/live/Info/LiveLike"
+import DisplayComment from "./components/live/Comment/DisplayComment";
 
 
 import "./Live.css"
-
 
 
 function Live({liveInfo,index}):JSX.Element {
@@ -55,7 +54,7 @@ function Live({liveInfo,index}):JSX.Element {
                 src={liveInfo.playUrl}/>
 
             <DisplayComment
-                id = {liveInfo._id}
+                _id = {liveInfo._id}
             />
             <LiveLike/>
         </div>

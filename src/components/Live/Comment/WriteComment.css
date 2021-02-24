@@ -1,0 +1,41 @@
+.comment-input-div {
+    height: 30px;
+    width: 40%;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #CCCCCC;
+    outline: medium;
+    border: none;
+    padding: 0 10px;
+    margin: 0 0 15px 15px;
+    box-sizing: border-box;
+    text-align: left;
+    line-height: 30px;
+}
+
+.comment-input-area {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    width: 100%;
+}
+
+.comment-input-dialog {
+    position: relative;
+    border-style: none;
+    /*margin: 5px 10px;*/
+    margin: 0 1%;
+    padding: 0 10px;
+    height: 40px;
+    width: 98%;
+    box-sizing: border-box;
+}
+
+.comment-icon-send {
+    position: absolute;
+    background-color: red;
+    padding: 15px;
+    right: 50px;
+}
+
+

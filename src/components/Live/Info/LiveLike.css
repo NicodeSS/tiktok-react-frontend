@@ -3,8 +3,8 @@
     border-radius: 50%;
     background-color: rgba(0,0,0,0.2);
     padding: 5px;
-    bottom: 2%;
-    left:35%;
+    bottom: 5%;
+    left:46%;
 }
 
 .heart{
@@ -16,17 +16,17 @@
 }
 
 .heart0{
-    left:36%;
+    left:46%;
 }
 
 .heart1{
-    left:38%;
+    left:48%;
     transform: rotate(29deg);
 }
 
 .heart2{
     transform: rotate(-29deg);
-    left:34%;
+    left:44%;
 }
 
 

@@ -2,19 +2,25 @@ import React from "react";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import Ticker from "react-ticker";
 
-import "./VideoFooter.css";
+import "./index.css";
 
-const disc = './img/disc.png';
+interface Props {
+    author_nick: string,
+    tagList: Array<string>,
+    description: string,
+    song: string,
+    playing: boolean
+}
 
-function VideoFooter({author_nick, tagList, description, song, playing}):JSX.Element {
+function VideoFooter({author_nick, tagList, description, song, playing}: Props): JSX.Element {
     return (
-        <div className="videoFooter">
-            <div className="videoFooter_text">
+        <div className="video-footer">
+            <div className="video-footer-text">
                 <h3>@{author_nick}</h3>
                 <strong>{("#" + tagList.join(" #"))}</strong>
                 <p>{description}</p>
-                <div className="videoFooter_ticker">
-                    <MusicNoteIcon className="videoFooter_icon"/>
+                <div className="video-footer-ticker">
+                    <MusicNoteIcon className="video-footer-icon"/>
                     <Ticker
                         mode="smooth"
                         move={playing}
@@ -25,7 +31,6 @@ function VideoFooter({author_nick, tagList, description, song, playing}):JSX.Ele
                     </Ticker>
                 </div>
             </div>
-            <img className="videoFooter_record" src={disc} alt="disc" />
         </div>
     )
 }

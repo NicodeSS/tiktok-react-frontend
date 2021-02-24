@@ -1,5 +1,5 @@
 import React from 'react'
-import {getLiveLikeWs} from "../../api/live";
+import {getLiveLikeWs} from "../../../api/live";
 import './LiveLike.css'
 
 import FavoriteIcon from '@material-ui/icons/Favorite';

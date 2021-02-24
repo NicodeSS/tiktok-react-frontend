@@ -7,3 +7,8 @@ export interface LiveInfo {
     playUrl: string,
     description: string,
 }
+
+export interface LivesListParams {
+    limit?: number,
+    offset?: number
+}

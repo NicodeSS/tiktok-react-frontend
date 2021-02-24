@@ -1,11 +1,16 @@
 import axios from "../utils/axios"
+import {VideosListParams} from "../types/video";
 
-const getVideos = (params={}) => {
+export const videos_list = (params: VideosListParams = {}) => {
     return axios.get('/video/list', params)
 }
 
-const getVideosMocked = () => {
-    return new Promise((resolve, reject) => {
+export const video_like = (id: string) => {
+    return axios.post('/video/like', {_id: id})
+}
+
+export const getVideosMocked = () => {
+    return new Promise((resolve) => {
         resolve(
             [
                 {
@@ -50,4 +55,3 @@ const getVideosMocked = () => {
         )
     })
 }
-export default getVideos

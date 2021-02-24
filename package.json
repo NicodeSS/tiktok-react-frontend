@@ -19,11 +19,9 @@
     "react-intersection-observer": "^8.31.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
-    "react-tabs": "^3.2.0",
     "react-ticker": "^1.2.2",
     "typescript": "^4.1.3",
-    "web-vitals": "^1.1.0",
-    "xgplayer": "^2.17.13"
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
