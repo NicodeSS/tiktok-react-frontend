@@ -23,6 +23,17 @@ const getCommentsWS = (live_id: string)=>{
     return ws;
 }
 
+const getLiveLikeWs = (live_id:string)=>{
+    let wsUrl = 'ws://182.61.20.79:8081?room=' + live_id //接口
+    let ws = new WebSocket(wsUrl); //建立websocket连接
+
+    ws.onopen = function(evt) { //连接websocket触发该函数
+        console.log("匿名用户接收点赞信息");
+    };
+
+    return ws;
+}
+
 const getLivesMocked = () => {
     return new Promise((resolve, reject) => {
         resolve(
@@ -50,4 +61,4 @@ const getLivesMocked = () => {
     })
 }
 
-export {getLives,getCommentsWS}
+export {getLives,getCommentsWS,getLiveLikeWs}

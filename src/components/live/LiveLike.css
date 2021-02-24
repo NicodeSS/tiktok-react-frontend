@@ -1,0 +1,42 @@
+.likeIcon{
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.2);
+    padding: 5px;
+    bottom: 2%;
+    left:35%;
+}
+
+.heart{
+    position: absolute;
+    height: 5%;
+    animation: heartMove 3s;
+    width: 8%;
+    visibility: hidden;
+}
+
+.heart0{
+    left:36%;
+}
+
+.heart1{
+    left:38%;
+    transform: rotate(29deg);
+}
+
+.heart2{
+    transform: rotate(-29deg);
+    left:34%;
+}
+
+
+@keyframes heartMove {
+    0%{
+        visibility: visible;
+        bottom: 10%;
+    }
+    100%{
+        opacity: 0;
+        bottom: 50%;
+    }
+}
