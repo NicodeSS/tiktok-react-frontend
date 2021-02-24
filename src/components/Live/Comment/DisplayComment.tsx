@@ -3,6 +3,7 @@ import {websocket_create} from '../../../api/live'
 import WriteComment from "./WriteComment";
 
 import './DisplayComment.css'
+import LiveLike from "../Like";
 
 interface Comment {
     userName: string;
@@ -23,11 +24,13 @@ class DisplayComment extends React.Component<Props, States> {
     private list: React.RefObject<unknown>;
     private comments: any;
     private ws: WebSocket;
+    private likeRef: any;
 
     constructor(props: Props) {
         super(props);
         this.comments = [];
         this.list = React.createRef();
+        this.likeRef = React.createRef();
         this.state = {
             displayComment: [
                 {userName: "测试用户1", comment: "测试评论测试评论测试评论测试评论测试评论测试评论测试评论"},
@@ -44,27 +47,39 @@ class DisplayComment extends React.Component<Props, States> {
         };
         this.ws = websocket_create(props._id);
         this.ws.onmessage = (evt) => {
-            this.comments.push(evt.data);
-
-            // Cache, to avoid poping up too frequently
-            let len: number = this.comments.length;
-            if (len > 0) {
-                const timer = setInterval((): void => {
-                    this.setState({
-                        displayComment: [...this.state.displayComment, {
-                            userName: '匿名用户',
-                            comment: this.comments.shift()
-                        }]
-                    });
-                    len--;
-                    if (this.state.scrollLock) this.setState({unread: this.state.unread + 1})
-                    if (len === 0)
-                        clearInterval(timer);
-                }, 500);
+            let wsEvent = JSON.parse(evt.data)
+            if(wsEvent.event===1){
+                this.comments.push(wsEvent.data);
+                // Cache, to avoid poping up too frequently
+                let len: number = this.comments.length;
+                if (len > 0) {
+                    const timer = setInterval((): void => {
+                        this.setState({
+                            displayComment: [...this.state.displayComment, {
+                                userName: '匿名用户',
+                                comment: this.comments.shift()
+                            }]
+                        });
+                        len--;
+                        if (this.state.scrollLock) this.setState({unread: this.state.unread + 1})
+                        if (len === 0)
+                            clearInterval(timer);
+                    }, 500);
+                }
+            }
+            else if(wsEvent.event===2)
+            {
+                if(this.likeRef)
+                    this.likeRef.handleWsLike()
             }
         }
         this.handleCommentAreaScroll = this.handleCommentAreaScroll.bind(this)
         this.handleUnreadClick = this.handleUnreadClick.bind(this)
+        this.onRef = this.onRef.bind(this)
+    }
+
+    onRef(ref:any) {
+        this.likeRef = ref
     }
 
     getSnapshotBeforeUpdate(): number | null {
@@ -105,30 +120,38 @@ class DisplayComment extends React.Component<Props, States> {
 
     render() {
         return (
-            <div className="comment-area">
-                <div className="comment-container">
-                    <div className="comment-display" ref={this.list as React.RefObject<HTMLDivElement>}
-                         onScroll={this.handleCommentAreaScroll}
-                    >
-                        {
-                            this.state.displayComment.length > 0 &&
-                            this.state.displayComment.map(({userName, comment}, index) =>
-                                <div key={index}
-                                     className={["comment-area-single", (index === this.state.displayComment.length - 1) ? "comment-slide" : null].join(' ')}>
-                                    <p className="comment">
-                                        <span className="username">{userName}: </span>{comment}
-                                    </p>
-                                </div>)
+            <div>
+                <div className="comment-area-btn-like">
+                    <LiveLike
+                        ws={this.ws}
+                        onRef={this.onRef}
+                    />
+                </div>
+                <div className="comment-area">
+                    <div className="comment-container">
+                        <div className="comment-display" ref={this.list as React.RefObject<HTMLDivElement>}
+                             onScroll={this.handleCommentAreaScroll}
+                        >
+                            {
+                                this.state.displayComment.length > 0 &&
+                                this.state.displayComment.map(({userName, comment}, index) =>
+                                    <div key={index}
+                                         className={["comment-area-single", (index === this.state.displayComment.length - 1) ? "comment-slide" : null].join(' ')}>
+                                        <p className="comment">
+                                            <span className="username">{userName}: </span>{comment}
+                                        </p>
+                                    </div>)
+                            }
+                        </div>
+                        {this.state.unread > 0 &&
+                        <div className="unread" onClick={this.handleUnreadClick}>
+                            {this.state.unread}条新消息
+                        </div>
                         }
                     </div>
-                    {this.state.unread > 0 &&
-                    <div className="unread" onClick={this.handleUnreadClick}>
-                        {this.state.unread}条新消息
+                    <div className="comment-input">
+                        <WriteComment ws={this.ws}/>
                     </div>
-                    }
-                </div>
-                <div className="comment-input">
-                    <WriteComment ws={this.ws}/>
                 </div>
             </div>
         )

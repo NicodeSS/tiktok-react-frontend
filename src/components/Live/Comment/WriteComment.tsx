@@ -16,7 +16,7 @@ class WriteComment extends React.Component<Props, States> {
     private winHeight: number;
     private input: any;
 
-    constructor(props:Props) {
+    constructor(props: Props) {
         super(props);
         this.input = null;
         this.commentInput = null;
@@ -28,17 +28,17 @@ class WriteComment extends React.Component<Props, States> {
         this.sendComment = this.sendComment.bind(this)
     }
 
-    handleInputClick(event: any):void {
+    handleInputClick(event: any): void {
         this.setState({focused: true})
     }
 
 
-    handleInputClose(event: any):void {
+    handleInputClose(event: any): void {
         this.setState({focused: false})
     }
 
-    sendComment(event: any):void {
-        this.props.ws.send(this.input.value);
+    sendComment(event: any): void {
+        this.props.ws.send(JSON.stringify({event: 1, data: this.input.value}));
         this.handleInputClose({})
     }
 
@@ -49,7 +49,7 @@ class WriteComment extends React.Component<Props, States> {
             root.style.minHeight = this.winHeight + "px";
 
         window.addEventListener('resize', () => {
-            if (window.outerHeight >= this.winHeight){
+            if (window.outerHeight >= this.winHeight) {
                 const input = document.querySelector('input')
                 if (input)
                     input.blur();

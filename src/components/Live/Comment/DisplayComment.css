@@ -71,3 +71,12 @@
     text-align: center;
     line-height: 25px;
 }
+.comment-area-btn-like
+{
+    height: 500px;
+    width:30px;
+    position: absolute;
+    right:15px;
+    bottom:0;
+}
+
